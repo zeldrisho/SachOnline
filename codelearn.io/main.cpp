@@ -3,12 +3,7 @@ using namespace std;
 
 int main() {
     string s;
-    getline(cin, s);
-    char c = s[s.length()];
-    if (c == '\n') {
-        cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
-    }
+    s += "trung";
+    cout << s << endl;
     return 0;
 }

@@ -2,27 +2,20 @@
 #include <vector>
 using namespace std;
 
+int isValid(vector<int>& vt, int k) {
+    int n = vt.size();
+    int median;
+    if (n % 2 == 0) {
+        median = vt[n/2 + 1];
+    } else {
+        median = vt[(n + 1)/2];
+    }
+    if (median >= k) {
+        return 1;
+    }
+    return 0;
+}
+
 int main() {
-    int n, k, cnt = 0;
-    cin >> n >> k;
-    vector<int> vt;
-    vector<int> vt2;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (x > 0) {
-            vt.push_back(x);
-        } else {
-            vt2.push_back(x);
-        }
-    }
-    for (int i = 0; i < vt.size(); i++) {
-        for (int j = 0; j < vt2.size(); j++) {
-            if (vt[i] - (-vt2[j]) <= k &&vt[i] - (-vt2[j]) >= -k && vt[i] >= -vt2[j]) {
-                cnt++;
-            }
-        }
-    }
-    cout << cnt;
     return 0;
 }
