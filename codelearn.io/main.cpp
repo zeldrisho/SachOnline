@@ -2,8 +2,9 @@
 using namespace std;
 
 int main() {
-    string s;
-    s += "trung";
-    cout << s << endl;
+    int n;
+    n = 0;
+    n++;
+    cout << n << endl;
     return 0;
 }
