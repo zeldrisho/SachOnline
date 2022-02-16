@@ -1,0 +1,14 @@
+String:
+Given a Vietnamese fullname (ex “Nguyen Van Teo”).
+Students need to write methods as follows:
+- 1. Count how many words in the name.
+- 2. Return a first name
+- 3. Return a last name
+- 4. Return a middle name
+5. Capitalize the first character in each word of the name
+6. Formalize the name, including:
+ Delete all spaces in front and behind of the name.
+ Leave one space between the words of the name.
+
+
+
