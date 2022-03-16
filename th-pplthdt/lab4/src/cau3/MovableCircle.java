@@ -11,29 +11,26 @@ public class MovableCircle extends MovablePoint {
 
     @Override
     public String toString() {
-        return "MovableCircle{" +
-                "radius=" + radius +
-                ", center=" + center +
-                '}';
+        return "MovableCircle[radius=" + radius + ",center=[" + super.toString();
     }
 
     @Override
     public void moveUp() {
-        center.y += ySpeed;
+        setY(getY() + getySpeed());
     }
 
     @Override
     public void moveDown() {
-        center.y -= ySpeed;
+        setY(getY() - getySpeed());
     }
 
     @Override
     public void moveLeft() {
-        x -= xSpeed;
+        setX(getX() - getxSpeed());
     }
 
     @Override
     public void moveRight() {
-        x += xSpeed;
+        setX(getX() + getxSpeed());
     }
 }

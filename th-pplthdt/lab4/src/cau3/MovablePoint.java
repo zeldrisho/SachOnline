@@ -1,10 +1,10 @@
 package cau3;
 
 public class MovablePoint implements Movable {
-    protected int x;
-    protected int y;
-    protected int xSpeed;
-    protected int ySpeed;
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
 
     public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
         this.x = x;
@@ -13,14 +13,33 @@ public class MovablePoint implements Movable {
         this.ySpeed = ySpeed;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     @Override
     public String toString() {
-        return "MovablePoint{" +
-                "x=" + x +
-                ", y=" + y +
-                ", xSpeed=" + xSpeed +
-                ", ySpeed=" + ySpeed +
-                '}';
+        return "MovablePoint[x=" + x + ",y=" + y + "]";
     }
 
     @Override

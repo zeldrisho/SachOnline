@@ -40,4 +40,9 @@ public class Square extends Rectangle{
     public double getLength() {
         return super.getLength();
     }
+
+    @Override
+    public String toString() {
+        return "Square[" + super.toString() + "]";
+    }
 }

@@ -56,7 +56,7 @@ public class Rectangle extends Shape {
     }
 
     public String toString() {
-        return "Rectangle{" + "length=" + length + ", width=" + width + ", color=" + color + '}';
+        return "Rectangle[" + super.toString() + ",width=" + width + ",length=" + length + "]";
     }
 }
 
