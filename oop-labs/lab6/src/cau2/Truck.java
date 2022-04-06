@@ -5,10 +5,4 @@ public class Truck implements Vehicle {
 	public void move() {
 		System.out.println("Truck is moving");
 	}
-	
-	class Vehicle {
-		String getVehicle() {
-			return "Truck";
-		}
-	}
 }
