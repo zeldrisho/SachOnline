@@ -1,0 +1,11 @@
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\bin\Debug\BaiTap2.exe.config
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\bin\Debug\BaiTap2.exe
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\bin\Debug\BaiTap2.pdb
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.csproj.AssemblyReference.cache
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.csproj.SuggestedBindingRedirects.cache
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.frmBaiTap2.resources
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.Properties.Resources.resources
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.csproj.GenerateResource.cache
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.csproj.CoreCompileInputs.cache
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.exe
+G:\workspace\programming-windows-labs\Lab1\BaiTap2\obj\Debug\BaiTap2.pdb
