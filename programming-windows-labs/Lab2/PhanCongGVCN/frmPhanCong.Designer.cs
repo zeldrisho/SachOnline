@@ -1,6 +1,6 @@
 ﻿namespace PhanCongGVCN
 {
-    partial class Form1
+    partial class frmPhanCong
     {
         /// <summary>
         /// Required designer variable.
@@ -98,7 +98,10 @@
             "10A3",
             "11A1",
             "11A2",
-            "11A3"});
+            "11A3",
+            "12A1",
+            "12A2",
+            "12A3"});
             this.lstClass.Location = new System.Drawing.Point(206, 94);
             this.lstClass.Name = "lstClass";
             this.lstClass.Size = new System.Drawing.Size(120, 180);
@@ -107,12 +110,12 @@
             // lstPhanCong
             // 
             this.lstPhanCong.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lstPhanCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstPhanCong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstPhanCong.FormattingEnabled = true;
-            this.lstPhanCong.ItemHeight = 20;
+            this.lstPhanCong.ItemHeight = 16;
             this.lstPhanCong.Location = new System.Drawing.Point(502, 94);
             this.lstPhanCong.Name = "lstPhanCong";
-            this.lstPhanCong.Size = new System.Drawing.Size(255, 184);
+            this.lstPhanCong.Size = new System.Drawing.Size(255, 180);
             this.lstPhanCong.TabIndex = 5;
             // 
             // btnPhanCong
@@ -139,7 +142,7 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // Form1
+            // frmPhanCong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,9 +155,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "frmPhanCong";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Phân công GVCN";
             this.ResumeLayout(false);
             this.PerformLayout();
 
