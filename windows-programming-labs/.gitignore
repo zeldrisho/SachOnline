@@ -1,12 +1,5 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/windows,csharp,visualstudio,advancedinstaller,executable
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,csharp,visualstudio,advancedinstaller,executable
-
-### AdvancedInstaller ###
-# Advanced Installer caches and default build output
-*-cache/
-*-SetupFiles/
-Prerequisites/
+# Created by https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,executable,windows
+# Edit at https://www.toptal.com/developers/gitignore?templates=csharp,visualstudio,executable,windows
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -32,8 +25,8 @@ mono_crash.*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-# x64/
-# x86/
+x64/
+x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
@@ -620,4 +613,4 @@ $RECYCLE.BIN/
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,csharp,visualstudio,advancedinstaller,executable
+# End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,executable,windows
