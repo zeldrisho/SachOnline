@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Ca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{0BA0C948-3609-4F66-96A7-05F507915A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhanCongGVCN", "PhanCongGVCN\PhanCongGVCN.csproj", "{6596DEF9-54F8-4419-A623-91800D10755E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichTextEditor", "RichTextEditor\RichTextEditor.csproj", "{34C2E31B-EFE0-4486-8035-B08DE37EF33E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{0BA0C948-3609-4F66-96A7-05F507915A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BA0C948-3609-4F66-96A7-05F507915A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BA0C948-3609-4F66-96A7-05F507915A87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6596DEF9-54F8-4419-A623-91800D10755E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6596DEF9-54F8-4419-A623-91800D10755E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6596DEF9-54F8-4419-A623-91800D10755E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6596DEF9-54F8-4419-A623-91800D10755E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34C2E31B-EFE0-4486-8035-B08DE37EF33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34C2E31B-EFE0-4486-8035-B08DE37EF33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34C2E31B-EFE0-4486-8035-B08DE37EF33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34C2E31B-EFE0-4486-8035-B08DE37EF33E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
