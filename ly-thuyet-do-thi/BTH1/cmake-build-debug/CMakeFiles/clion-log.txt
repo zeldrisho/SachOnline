@@ -1,0 +1,4 @@
+C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/giatrung2012/scoop/apps/clion/current/IDE/bin/ninja/win/ninja.exe -G Ninja -S D:\workspace\BTH1 -B D:\workspace\BTH1\cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/workspace/BTH1/cmake-build-debug

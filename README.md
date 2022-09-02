@@ -1,3 +1,4 @@
 - Lập trình hướng đối tượng: Java
 - Lập trình trên Windows: C# WinForms (.NET Framework)
-
+- Lập trình Web: ASP.NET MVC 5 (.NET Framework)
+- Lý thuyết đồ thị: C++
