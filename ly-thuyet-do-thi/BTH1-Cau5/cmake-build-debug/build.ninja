@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = D$:/workspace/BTH1-Cau5/cmake-build-debug/
+cmake_ninja_workdir = D$:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH1-Cau5/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target BTH1_Cau5
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:/workspace/BTH1-Cau5/cmake-build-debug/
 
 build cmake_object_order_depends_target_BTH1_Cau5: phony || CMakeFiles/BTH1_Cau5.dir
 
-build CMakeFiles/BTH1_Cau5.dir/main.cpp.obj: CXX_COMPILER__BTH1_Cau5_Debug D$:/workspace/BTH1-Cau5/main.cpp || cmake_object_order_depends_target_BTH1_Cau5
+build CMakeFiles/BTH1_Cau5.dir/main.cpp.obj: CXX_COMPILER__BTH1_Cau5_Debug D$:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH1-Cau5/main.cpp || cmake_object_order_depends_target_BTH1_Cau5
   DEP_FILE = CMakeFiles\BTH1_Cau5.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\BTH1_Cau5.dir
@@ -81,7 +81,7 @@ build BTH1_Cau5.exe: CXX_EXECUTABLE_LINKER__BTH1_Cau5_Debug CMakeFiles/BTH1_Cau5
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\workspace\BTH1-Cau5\cmake-build-debug && C:\Users\giatrung2012\scoop\apps\clion\2022.2.1-222.3739.54\IDE\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH1-Cau5\cmake-build-debug && C:\Users\giatrung2012\scoop\apps\clion\2022.2.1-222.3739.54\IDE\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -92,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D D:\workspace\BTH1-Cau5\cmake-build-debug && C:\Users\giatrung2012\scoop\apps\clion\2022.2.1-222.3739.54\IDE\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\workspace\BTH1-Cau5 -BD:\workspace\BTH1-Cau5\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH1-Cau5\cmake-build-debug && C:\Users\giatrung2012\scoop\apps\clion\2022.2.1-222.3739.54\IDE\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH1-Cau5 -BD:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH1-Cau5\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -110,7 +110,7 @@ build BTH1_Cau5: phony BTH1_Cau5.exe
 # =============================================================================
 
 #############################################
-# Folder: D:/workspace/BTH1-Cau5/cmake-build-debug
+# Folder: D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH1-Cau5/cmake-build-debug
 
 build all: phony BTH1_Cau5.exe
 

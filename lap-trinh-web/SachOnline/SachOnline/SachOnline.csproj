@@ -201,6 +201,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ChuDePartial.cshtml" />
     <Content Include="Views\Home\NxbPartial.cshtml" />
+    <Content Include="Views\Home\NavPartial.cshtml" />
+    <Content Include="Views\Home\SliderPartial.cshtml" />
+    <Content Include="Views\Home\SachBanNhieuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,50 +1,33 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 using namespace std;
 
 int main() {
-	// Cau 5
+    // Cau 5
     // File input.txt trong folder cmake-build-debug
     ifstream ifs("input.txt");
-    if (!ifs.is_open())
-        cout << "Error" ;
-    int n, x, k = 0;
+    int arr[100][100], n, cnt = 0, b[100], c[100], k = 0;
     ifs >> n;
-    int arr[n][n], b[n * n];
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
             ifs >> arr[i][j];
         }
     }
-    cout << "Ma tran ke:" << endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
-    }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            b[k++] = arr[i][j];
-        }
-    }
-    cout << endl;
-    cout << "Danh sach canh:" << endl;
-    int z = 0;
-    for (int i = 0; i < n; i++) {
-        vector<int> v;
-        for (int j = 0; j < n; j++) {
-            x = b[z];
-            z++;
-            if (x == 1) {
-                v.push_back(j);
+    cout << n << " ";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (arr[i][j] == 1) {
+                if (j > i) {
+                    cnt++;
+                    b[cnt] = i;
+                    c[cnt] = j;
+                }
+                k = 1;
             }
         }
-        for (int j = 0; j < v.size(); j++) {
-            cout << v[j] << " ";
-        }
-        cout << endl;
     }
+    cout << cnt << endl;
+    for (int i = 1; i <= cnt; i++)
+        cout << b[i] << " " << c[i] << endl;
     return 0;
 }
