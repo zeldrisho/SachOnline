@@ -122,13 +122,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbSachOnline.designer.cs">
+    <Compile Include="Models\DbSachOnline.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbSachOnline.dbml</DependentUpon>
+      <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -168,13 +169,13 @@
     <Content Include="Images\THCB.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Models\dbSachOnline.dbml">
+    <Content Include="Models\DbSachOnline.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>dbSachOnline.designer.cs</LastGenOutput>
+      <LastGenOutput>DbSachOnline.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Models\dbSachOnline.dbml.layout">
-      <DependentUpon>dbSachOnline.dbml</DependentUpon>
+    <None Include="Models\DbSachOnline.dbml.layout">
+      <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -199,11 +200,15 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\ChuDePartial.cshtml" />
-    <Content Include="Views\Home\NxbPartial.cshtml" />
-    <Content Include="Views\Home\NavPartial.cshtml" />
-    <Content Include="Views\Home\SliderPartial.cshtml" />
-    <Content Include="Views\Home\SachBanNhieuPartial.cshtml" />
+    <Content Include="Views\Shared\ChuDePartial.cshtml" />
+    <Content Include="Views\Shared\NxbPartial.cshtml" />
+    <Content Include="Views\Shared\NavPartial.cshtml" />
+    <Content Include="Views\Shared\SliderPartial.cshtml" />
+    <Content Include="Views\Shared\SachBanNhieuPartial.cshtml" />
+    <Content Include="Views\Home\SachTheoCD.cshtml" />
+    <Content Include="Views\Home\SachTheoNXB.cshtml" />
+    <Content Include="Views\Home\ChiTietSach.cshtml" />
+    <Content Include="Views\User\DangKy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

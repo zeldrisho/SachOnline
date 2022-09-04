@@ -2,7 +2,8 @@
 
 <html>
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
@@ -20,16 +21,9 @@
     </style>
 </head>
 <body>
-    @Html.Action("NavPartial", "Home")
+    @Html.Partial("NavPartial")
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                @Html.Action("SliderPartial", "Home")
-            </div>
-        </div>
-        <hr />
-    </div>
+    @Html.Partial("SliderPartial")
 
     <div class="container">
         <div class="row">
@@ -47,12 +41,10 @@
         </div>
     </div>
 
-    <div class="container">
-        @Html.Action("SachBanNhieuPartial", "Home")
-    </div>
+    @RenderSection("SachBanNhieu", required: false)
 
     <footer class="container well">
-        <div style="text-align:center">
+        <div class="text-center">
             <p>&copy; 2022 - Nhà sách ABC. Alright Reserved</p>
             <p>Website được phát triển để sử dụng làm bài tập thực hành môn Lập trình Web</p>
             <p>Email: abc@gmail.com</p>
