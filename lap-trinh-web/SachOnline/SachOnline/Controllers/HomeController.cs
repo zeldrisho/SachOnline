@@ -28,6 +28,7 @@ namespace SachOnline.Controllers
             return data.SACHes.OrderByDescending(a => a.SoLuongBan).Take(count).ToList();
         }
 
+        // GET: Home
         public ActionResult Index()
         {
             // Lay 6 quyen sach moi
