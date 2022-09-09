@@ -4,24 +4,22 @@
     <h2 class="text-center">SÁCH BÁN NHIỀU</h2>
     <hr />
     <div class="row">
-        @for (int i = 0; i < 2; i++)
+        @foreach (var item in Model)
         {
             <div class="col-lg-6 col-md-6">
                 <div class="media-object-default">
-                    @foreach (var item in Model)
-                    {
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="@Url.Action("ChiTietSach", "Home", new { id = item.MaSach })">
-                                    <img class="media-object imgsachbannhieu" src="~/Images/@item.AnhBia" alt="placeholder image">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">@item.TenSach</h4>
-                                @item.MoTa
-                            </div>
+
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="@Url.Action("ChiTietSach", "Home", new { id = item.MaSach })">
+                                <img class="media-object imgsachbannhieu" src="~/Images/@item.AnhBia" alt="placeholder image">
+                            </a>
                         </div>
-                    }
+                        <div class="media-body">
+                            <h4 class="media-heading">@item.TenSach</h4>
+                            <span class="book-desc">@item.MoTa</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         }

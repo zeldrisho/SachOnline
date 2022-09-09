@@ -110,6 +110,10 @@ namespace SachOnline.Controllers
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
+                    if (Session["GioHang"] == null)
+                    {
+                        RedirectToAction("XacNhanDonHang", "GioHang");
+                    }
                 }
                 else
                 {

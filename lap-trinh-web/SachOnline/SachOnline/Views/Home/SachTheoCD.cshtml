@@ -1,8 +1,10 @@
-﻿@model IEnumerable<SachOnline.Models.SACH>
+﻿@using SachOnline.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
 
 @{
     ViewBag.Title = "Sách theo chủ đề";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <h2 class="text-center">SÁCH THEO CHỦ ĐỀ</h2>
@@ -27,6 +29,19 @@
         </div>
     }
 </div>
+
+@*Error*@
+@*Tạo liên kết các trang*@
+@*Trang @(Model.PageCount<Model.PageCount?0:Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("SachTheoCD", new { iMaCD = ViewBag.MaCD, page = page }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>*@
 
 <nav class="text-center">
     <ul class="pagination">

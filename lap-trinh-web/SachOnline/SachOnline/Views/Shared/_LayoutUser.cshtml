@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+        .imgbook {
+            transition: all 1s ease-in;
+            width: 400px;
+        }
+
+            .imgbook:hover {
+                transform: scale(0.9);
+                cursor: pointer;
+            }
+
+        .imgsachbannhieu {
+            width: 100px;
+        }
+
+        .book-desc {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+        }
+    </style>
+</head>
+<body>
+    @Html.Action("NavPartial", "Home")
+
+    @Html.Partial("SliderPartial")
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <!--CHỦ ĐỀ và NHÀ XUẤT BẢN-->
+                @Html.Action("ChuDePartial", "Home")
+                <br>
+                @Html.Action("NxbPartial", "Home")
+                <br>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                @RenderBody()
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    @RenderSection("SachBanNhieu", required: false)
+
+    <footer class="container well">
+        <div class="text-center">
+            <p>&copy; @DateTime.Now.Year - Nhà sách ABC. Alright Reserved</p>
+            <p>Website được phát triển để sử dụng làm bài tập thực hành môn Lập trình Web</p>
+            <p>Email: 2024801030101@student.tdmu.edu.vn</p>
+        </div>
+    </footer>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

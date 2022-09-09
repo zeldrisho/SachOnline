@@ -2,101 +2,113 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 13" name="DbSachOnline">
   <DataContextMoniker Name="/DbSachOnlineDataContext" />
   <nestedChildShapes>
-    <classShape Id="dd8d3ea5-9bf2-45ac-b4fa-004b19e57d8e" absoluteBounds="6.25, 3.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/DbSachOnlineDataContext/CHITIETDATHANG" />
+    <classShape Id="45ae7ee0-3feb-442d-800f-41ffc1e75593" absoluteBounds="6.75, 6.375, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/DbSachOnlineDataContext/ADMIN" />
       <nestedChildShapes>
-        <elementListCompartment Id="9e3976fe-1e01-47ba-bf8f-d9df3831b8c1" absoluteBounds="6.265, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b161ec10-1eb3-4167-9ce0-357f8086e4d4" absoluteBounds="6.765, 6.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6ec90304-6beb-4293-bcc4-319df86ef43e" absoluteBounds="6.25, 0.75, 2, 1.5785953776041666">
+    <classShape Id="d52422ef-f444-4afd-88ef-05ef5fbfaabf" absoluteBounds="6.25, 3.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DbSachOnlineDataContext/VIETSACH" />
       <nestedChildShapes>
-        <elementListCompartment Id="324b82a7-f921-4e63-8737-ae5374d3c7b2" absoluteBounds="6.265, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="24759d74-3ffe-452b-999e-4691b35caf44" absoluteBounds="6.265, 4.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="60f46deb-0a4c-4a36-a738-5c4abfb7eae8" absoluteBounds="0.75, 4, 2, 1.193992513020834">
+    <classShape Id="7a0c200a-a5ff-4527-b1e0-0b38546be5fc" absoluteBounds="6.25, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DbSachOnlineDataContext/CHITIETDATHANG" />
+      <nestedChildShapes>
+        <elementListCompartment Id="049c7286-319d-4c0a-af57-ed47c1bd86eb" absoluteBounds="6.265, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="23b6bc2c-647c-4b4e-beba-34cd653aed02" absoluteBounds="0.75, 4, 2, 1.193992513020834">
       <DataClassMoniker Name="/DbSachOnlineDataContext/CHUDE" />
       <nestedChildShapes>
-        <elementListCompartment Id="87038b3c-7e42-475d-bba5-7b7823026c91" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fea177ec-ec8f-4b9b-be06-01cc93bd754e" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3d539dca-19ed-448a-82dd-89c0a9c003a2" absoluteBounds="3.5, 10.5, 2, 1.9631982421874987">
+    <classShape Id="a9b423a6-5a08-45b6-bb43-2c61b76873e5" absoluteBounds="3.5, 10.5, 2, 1.9631982421874987">
       <DataClassMoniker Name="/DbSachOnlineDataContext/DONDATHANG" />
       <nestedChildShapes>
-        <elementListCompartment Id="d5549f6e-87bb-407e-a97e-0bd194662791" absoluteBounds="3.515, 10.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b7d8d725-af8f-4681-af0d-a7f0f029f073" absoluteBounds="3.515, 10.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1af86e3d-af30-4a7a-bcf8-5750ea7fc928" absoluteBounds="0.75, 10.375, 2, 2.3478011067708344">
+    <classShape Id="47c9cdbe-e919-497b-9096-78d0c8252432" absoluteBounds="0.75, 10.375, 2, 2.3478011067708344">
       <DataClassMoniker Name="/DbSachOnlineDataContext/KHACHHANG" />
       <nestedChildShapes>
-        <elementListCompartment Id="475cf4cf-1c0f-476f-84d4-362d8ef6f8a7" absoluteBounds="0.765, 10.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9eaa1195-225c-43ba-ab92-f3e23bf93a17" absoluteBounds="0.765, 10.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="75c6af0e-4219-480e-a471-3aed1c3bc367" absoluteBounds="0.75, 7.75, 2, 1.5785953776041666">
+    <classShape Id="e266a2ca-4609-447a-9400-618bfd71d8ba" absoluteBounds="6.75, 9.375, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/DbSachOnlineDataContext/MENU" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c18247e8-dc7e-4b10-8e5a-aa929f996be2" absoluteBounds="6.765, 9.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="18fa3e80-705d-46aa-9d09-deedc4466a85" absoluteBounds="0.75, 7.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DbSachOnlineDataContext/NHAXUATBAN" />
       <nestedChildShapes>
-        <elementListCompartment Id="1cf21a77-80c3-436e-91f3-7958dfd84d7f" absoluteBounds="0.765, 8.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="895d8f45-4c2b-4bd1-a0b1-d91a9aaeb94d" absoluteBounds="0.765, 8.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a80fd095-acb4-48be-97e8-590299d629d2" absoluteBounds="3.5, 3.25, 2, 2.5401025390624996">
+    <classShape Id="db572233-7ba4-4118-b643-56ebe643fe31" absoluteBounds="3.5, 3.25, 2, 2.5401025390624996">
       <DataClassMoniker Name="/DbSachOnlineDataContext/SACH" />
       <nestedChildShapes>
-        <elementListCompartment Id="c8827998-77a5-47ea-bb8f-9597116999e2" absoluteBounds="3.515, 3.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e77bf2e7-532c-4352-8e4d-40bbdae0115f" absoluteBounds="3.515, 3.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8a53f3f1-708f-4a81-9153-0dae0afacd1c" absoluteBounds="3.5, 7.125, 2, 1.7708968098958326">
+    <classShape Id="b98dca70-6173-43b0-ba6d-0555a72d8f42" absoluteBounds="3.5, 7.625, 2, 1.7708968098958326">
       <DataClassMoniker Name="/DbSachOnlineDataContext/TACGIA" />
       <nestedChildShapes>
-        <elementListCompartment Id="10e0ac4f-9103-4cb2-b935-5e09adb4d6c0" absoluteBounds="3.515, 7.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="af03764b-b648-4589-acdc-eda169da1761" absoluteBounds="3.515, 8.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 11.4815991210937); (7.25 : 11.4815991210937); (7.25 : 5.32859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 10.5); (5.875 : 10.125); (5.875 : 1.53929768880208); (6.25 : 1.53929768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/DONDATHANG/DONDATHANG_CHITIETDATHANG" />
       <nodes>
-        <classShapeMoniker Id="3d539dca-19ed-448a-82dd-89c0a9c003a2" />
-        <classShapeMoniker Id="dd8d3ea5-9bf2-45ac-b4fa-004b19e57d8e" />
+        <classShapeMoniker Id="a9b423a6-5a08-45b6-bb43-2c61b76873e5" />
+        <classShapeMoniker Id="7a0c200a-a5ff-4527-b1e0-0b38546be5fc" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 11.4815991210937); (3.5 : 11.4815991210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/KHACHHANG/KHACHHANG_DONDATHANG" />
       <nodes>
-        <classShapeMoniker Id="1af86e3d-af30-4a7a-bcf8-5750ea7fc928" />
-        <classShapeMoniker Id="3d539dca-19ed-448a-82dd-89c0a9c003a2" />
+        <classShapeMoniker Id="47c9cdbe-e919-497b-9096-78d0c8252432" />
+        <classShapeMoniker Id="a9b423a6-5a08-45b6-bb43-2c61b76873e5" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 4.53929768880208); (5.79166666666667 : 4.53929768880208 : JumpStart); (5.95833333333333 : 4.53929768880208 : JumpEnd); (6.25 : 4.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/DbSachOnlineDataContext/SACH/SACH_CHITIETDATHANG" />
-      <nodes>
-        <classShapeMoniker Id="a80fd095-acb4-48be-97e8-590299d629d2" />
-        <classShapeMoniker Id="dd8d3ea5-9bf2-45ac-b4fa-004b19e57d8e" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 3.25); (4.5 : 1.53929768880208); (6.25 : 1.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/SACH/SACH_VIETSACH" />
       <nodes>
-        <classShapeMoniker Id="a80fd095-acb4-48be-97e8-590299d629d2" />
-        <classShapeMoniker Id="6ec90304-6beb-4293-bcc4-319df86ef43e" />
+        <classShapeMoniker Id="db572233-7ba4-4118-b643-56ebe643fe31" />
+        <classShapeMoniker Id="d52422ef-f444-4afd-88ef-05ef5fbfaabf" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 3.25); (4.5 : 1.96519903320312); (5.79166666666667 : 1.96519903320312 : JumpStart); (5.95833333333333 : 1.96519903320312 : JumpEnd); (6.25 : 1.96519903320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DbSachOnlineDataContext/SACH/SACH_CHITIETDATHANG" />
+      <nodes>
+        <classShapeMoniker Id="db572233-7ba4-4118-b643-56ebe643fe31" />
+        <classShapeMoniker Id="7a0c200a-a5ff-4527-b1e0-0b38546be5fc" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 4.59699625651042); (3.04166666666667 : 4.59699625651042 : JumpStart); (3.20833333333333 : 4.59699625651042 : JumpEnd); (3.5 : 4.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/CHUDE/CHUDE_SACH" />
       <nodes>
-        <classShapeMoniker Id="60f46deb-0a4c-4a36-a738-5c4abfb7eae8" />
-        <classShapeMoniker Id="a80fd095-acb4-48be-97e8-590299d629d2" />
+        <classShapeMoniker Id="23b6bc2c-647c-4b4e-beba-34cd653aed02" />
+        <classShapeMoniker Id="db572233-7ba4-4118-b643-56ebe643fe31" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 7.75121330413662); (3.125 : 7.37621330413662); (3.125 : 3.89224612825521); (3.5 : 3.89224612825521)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/NHAXUATBAN/NHAXUATBAN_SACH" />
       <nodes>
-        <classShapeMoniker Id="75c6af0e-4219-480e-a471-3aed1c3bc367" />
-        <classShapeMoniker Id="a80fd095-acb4-48be-97e8-590299d629d2" />
+        <classShapeMoniker Id="18fa3e80-705d-46aa-9d09-deedc4466a85" />
+        <classShapeMoniker Id="db572233-7ba4-4118-b643-56ebe643fe31" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 7.125); (5.875 : 6.75); (5.875 : 1.96519853320312); (6.25 : 1.96519853320312)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 8.85659912109375); (5.79166666666667 : 8.85659912109375 : JumpStart); (5.95833333333333 : 8.85659912109375 : JumpEnd); (6.46875 : 8.85659912109375); (6.46875 : 5.32859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DbSachOnlineDataContext/TACGIA/TACGIA_VIETSACH" />
       <nodes>
-        <classShapeMoniker Id="8a53f3f1-708f-4a81-9153-0dae0afacd1c" />
-        <classShapeMoniker Id="6ec90304-6beb-4293-bcc4-319df86ef43e" />
+        <classShapeMoniker Id="b98dca70-6173-43b0-ba6d-0555a72d8f42" />
+        <classShapeMoniker Id="d52422ef-f444-4afd-88ef-05ef5fbfaabf" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

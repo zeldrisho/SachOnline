@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SachOnline.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace SachOnline.Controllers
 {
@@ -38,38 +40,73 @@ namespace SachOnline.Controllers
 
         public ActionResult ChuDePartial()
         {
-            var listChuDe = from cd in data.CHUDEs select cd;
+            var listChuDe = data.CHUDEs;
             return PartialView(listChuDe);
         }
 
         public ActionResult NxbPartial()
         {
-            var listNxb = from nxb in data.NHAXUATBANs select nxb;
+            var listNxb = data.NHAXUATBANs;
             return PartialView(listNxb);
         }
 
         public ActionResult SachBanNhieuPartial()
         {
-            var listSachBanNhieu = LaySachBanNhieu(3);
+            var listSachBanNhieu = LaySachBanNhieu(6);
             return PartialView(listSachBanNhieu);
         }
 
-        public ActionResult SachTheoCD(int id)
+        public ActionResult SachTheoCD(int iMaCD, int? page)
         {
-            var sach = from s in data.SACHes where s.MaCD == id select s;
-            return View(sach);
+            ViewBag.MaCD = iMaCD;
+            int iSize = 3;
+            int iPageNum = (page ?? 1);
+            var sach = data.SACHes.Where(s => s.MaCD == iMaCD);
+            return View(sach.ToPagedList(iPageNum, iSize));
         }
 
         public ActionResult SachTheoNXB(int id)
         {
-            var sach = from s in data.SACHes where s.MaNXB == id select s;
+            var sach = data.SACHes.Where(s => s.MaNXB == id);
             return View(sach);
         }
 
         public ActionResult ChiTietSach(int id)
         {
-            var sach = from s in data.SACHes where s.MaSach == id select s;
+            var sach = data.SACHes.Where(s => s.MaSach == id);
             return View(sach.Single());
+        }
+
+        public ActionResult NavPartial()
+        {
+            var menu = data.MENUs;
+            return PartialView(menu);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection f)
+        {
+            //Gán các giá trị người dùng nhập liệu cho các biến
+            var sTenDN = f["UserName"];
+            var sMatKhau = f["Password"];
+            //Gán giá trị cho đối tượng được tạo mới (ad)
+            ADMIN ad = data.ADMINs.SingleOrDefault(n => n.TenDN == sTenDN && n.MatKhau == sMatKhau);
+            if (ad != null)
+            {
+                Session["Admin"] = ad;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+            }
+            return View();
         }
     }
 }

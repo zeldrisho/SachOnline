@@ -16,7 +16,9 @@ namespace SachOnline
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                //Thêm hàng sau để tránh xung đột giữa các controller Home
+                namespaces: new[] { "SachOnline.Controllers" }
             );
         }
     }
