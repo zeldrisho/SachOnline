@@ -1,0 +1,41 @@
+﻿@model SachOnline.Models.NHAXUATBAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div>
+    <h4>CHI TIẾT NHÀ XUẤT BẢN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaNXB }) |
+    @Html.ActionLink("Trở về danh sách", "Index")
+</p>

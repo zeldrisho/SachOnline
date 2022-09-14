@@ -130,6 +130,7 @@
     <Compile Include="Areas\Admin\Controllers\SachController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NxbController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -339,6 +340,11 @@
     <Content Include="Views\GioHang\XacNhanDonHang.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="tinymce\langs\README.md" />
+    <Content Include="Views\Nxb\Index.cshtml" />
+    <Content Include="Views\Nxb\Create.cshtml" />
+    <Content Include="Views\Nxb\Details.cshtml" />
+    <Content Include="Views\Nxb\Edit.cshtml" />
+    <Content Include="Views\Nxb\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

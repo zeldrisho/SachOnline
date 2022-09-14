@@ -16,21 +16,53 @@
         (Chứa nội dung của navbar) -->
         <div class="collapse navbar-collapse" id="navbar1">
             <ul class="nav navbar-nav">
-                @foreach (var menu in Model)
+                @foreach (var item in Model)
                 {
-                    if (menu.ParentId == null)
+                    if (item.ParentId == null)
                     {
                         <li class="active dropdown">
-                            <a href="#">@menu.MenuName</a>
-                            @*@foreach (var submenu in Model)
-                            {
-                                <ul class="dropdown-menu">
-                                    @if (submenu.ParentId == menu.Id)
+                            @{
+                                int cnt = 0;
+                                foreach (var firstItem in Model)
+                                {
+                                    if (firstItem.ParentId == item.Id)
                                     {
-                                        <li><a href="@submenu.MenuLink"> @submenu.MenuName</a> </li>
+                                        cnt++;
                                     }
-                                </ul>
-                            }*@
+                                }
+                                if (cnt > 0)
+                                {
+                                    <a href="@item.MenuLink" class="dropdown-toggle" data-toggle="dropdown">@item.MenuName</a>
+                                }
+                                else
+                                {
+                                    <a href="@item.MenuLink">@item.MenuName</a>
+                                }
+                            }
+                            <ul class="dropdown-menu">
+                                @foreach (var firstItem in Model)
+                                {
+                                    if (firstItem.ParentId == item.Id)
+                                    {
+                                        <li>
+                                            <a href="@firstItem.MenuLink">@firstItem.MenuName</a>
+                                            <ul>
+                                                @foreach (var secondItem in Model)
+                                                {
+                                                    if (secondItem.ParentId == firstItem.Id)
+                                                    {
+                                                        <li>
+                                                            <a href="@secondItem.MenuLink">
+                                                                @secondItem.MenuName
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            </ul>
                         </li>
                     }
                 }
