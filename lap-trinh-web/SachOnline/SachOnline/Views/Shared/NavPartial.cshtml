@@ -15,58 +15,7 @@
         <!-- Collect the nav links, forms, and other content for toggling
         (Chứa nội dung của navbar) -->
         <div class="collapse navbar-collapse" id="navbar1">
-            <ul class="nav navbar-nav">
-                @foreach (var item in Model)
-                {
-                    if (item.ParentId == null)
-                    {
-                        <li class="active dropdown">
-                            @{
-                                int cnt = 0;
-                                foreach (var firstItem in Model)
-                                {
-                                    if (firstItem.ParentId == item.Id)
-                                    {
-                                        cnt++;
-                                    }
-                                }
-                                if (cnt > 0)
-                                {
-                                    <a href="@item.MenuLink" class="dropdown-toggle" data-toggle="dropdown">@item.MenuName</a>
-                                }
-                                else
-                                {
-                                    <a href="@item.MenuLink">@item.MenuName</a>
-                                }
-                            }
-                            <ul class="dropdown-menu">
-                                @foreach (var firstItem in Model)
-                                {
-                                    if (firstItem.ParentId == item.Id)
-                                    {
-                                        <li>
-                                            <a href="@firstItem.MenuLink">@firstItem.MenuName</a>
-                                            <ul>
-                                                @foreach (var secondItem in Model)
-                                                {
-                                                    if (secondItem.ParentId == firstItem.Id)
-                                                    {
-                                                        <li>
-                                                            <a href="@secondItem.MenuLink">
-                                                                @secondItem.MenuName
-                                                            </a>
-                                                        </li>
-                                                    }
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                }
-                            </ul>
-                        </li>
-                    }
-                }
-            </ul>
+            @Html.Action("MenuPartial", "Home")
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

@@ -1,6 +1,8 @@
-﻿@using SachOnline.Models;
+﻿@*@using SachOnline.Models;
 @using PagedList.Mvc;
-@model PagedList.PagedList<SACH>
+@model PagedList.PagedList<SACH>*@
+
+@model IEnumerable<SachOnline.Models.SACH>
 
 @{
     ViewBag.Title = "Sách theo chủ đề";

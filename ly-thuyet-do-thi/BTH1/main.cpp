@@ -29,9 +29,6 @@ int main() {
 	// Cau 1, 2, 3, 4
     // File input.txt trong folder cmake-build-debug
     ifstream ifs("input.txt");
-    if (!ifs.is_open()) {
-        cout << "Error" ;
-    }
     ifs >> n;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -47,7 +44,6 @@ int main() {
     cout << endl;
     cout << isValid(arr, n) << endl;
     cout << isSymmetric(arr, n) << endl;
-    cout << endl;
     int deg;
     for (int i = 0; i < n; i++) {
         deg = 0;

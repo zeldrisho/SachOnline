@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <!DOCTYPE html>
@@ -33,13 +33,13 @@
                 <td>Mật khẩu: </td>
                 <td>
                     @Html.Password("MatKhau")
-                    @ViewBag.Err2
+                    @ViewData["Err2"]
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="submit" value="Đăng nhập" />
+                    <input type="submit" value="Đăng nhập" class="btn btn-primary" />
                 </td>
             </tr>
         }

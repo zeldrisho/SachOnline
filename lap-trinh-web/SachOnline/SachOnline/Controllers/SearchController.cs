@@ -19,8 +19,8 @@ namespace SachOnline.Controllers
                 return View();
             }
             var kq = data.SACHes.Where(s => (
-                s.MaCD == int.Parse(strSearch)
-            )).OrderByDescending(s => s.SoLuongBan);
+                s.TenSach.Contains(strSearch)
+            ));
             ViewBag.Kq = kq.Count();
             return View(kq);
         }

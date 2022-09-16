@@ -110,17 +110,18 @@ namespace SachOnline.Controllers
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
-                    if (Session["GioHang"] == null)
-                    {
-                        RedirectToAction("XacNhanDonHang", "GioHang");
-                    }
+                    //if (Session["GioHang"] == null)
+                    //{
+                    //    RedirectToAction("XacNhanDonHang", "GioHang");
+                    //}
                 }
                 else
                 {
                     ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
                 }
             }
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return View();
         }
     }
 }

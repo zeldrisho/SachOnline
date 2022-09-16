@@ -345,6 +345,7 @@
     <Content Include="Views\Nxb\Details.cshtml" />
     <Content Include="Views\Nxb\Edit.cshtml" />
     <Content Include="Views\Nxb\Delete.cshtml" />
+    <Content Include="Views\Shared\MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

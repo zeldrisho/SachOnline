@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SachOnline.Models;
 using PagedList;
 using PagedList.Mvc;
+using System.Web.UI.WebControls;
 
 namespace SachOnline.Controllers
 {
@@ -56,13 +57,16 @@ namespace SachOnline.Controllers
             return PartialView(listSachBanNhieu);
         }
 
-        public ActionResult SachTheoCD(int iMaCD, int? page)
+        public ActionResult SachTheoCD(int id, int? page)
         {
-            ViewBag.MaCD = iMaCD;
-            int iSize = 3;
-            int iPageNum = (page ?? 1);
-            var sach = data.SACHes.Where(s => s.MaCD == iMaCD);
-            return View(sach.ToPagedList(iPageNum, iSize));
+            //ViewBag.MaCD = iMaCD;
+            //int iSize = 3;
+            //int iPageNum = (page ?? 1);
+            //var sach = data.SACHes.Where(s => s.MaCD == iMaCD);
+            //return View(sach.ToPagedList(iPageNum, iSize));
+
+            var sach = data.SACHes.Where(s => s.MaCD == id);
+            return View(sach);
         }
 
         public ActionResult SachTheoNXB(int id)
@@ -107,6 +111,18 @@ namespace SachOnline.Controllers
                 ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
             }
             return View();
+        }
+
+        public ActionResult MenuPartial()
+        {
+            ViewBag.Menu = MenuList();
+            return PartialView();
+        }
+
+        private IList<MENU> MenuList()
+        {
+            var list = data.MENUs.ToList();
+            return list;
         }
     }
 }

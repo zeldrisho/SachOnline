@@ -1,0 +1,3 @@
+D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH2-Cau1a/cmake-build-debug/CMakeFiles/BTH2_Cau1a.dir
+D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH2-Cau1a/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/BTH2-Cau1a/cmake-build-debug/CMakeFiles/rebuild_cache.dir
