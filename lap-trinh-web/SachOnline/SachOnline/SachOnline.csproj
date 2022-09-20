@@ -128,6 +128,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SachController.cs" />
+    <Compile Include="Controllers\FileAndMailController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NxbController.cs" />
@@ -142,6 +143,7 @@
       <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ReportInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -346,10 +348,12 @@
     <Content Include="Views\Nxb\Edit.cshtml" />
     <Content Include="Views\Nxb\Delete.cshtml" />
     <Content Include="Views\Shared\MenuPartial.cshtml" />
+    <Content Include="Views\FileAndMail\SendMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="UploadFile\" />
     <Folder Include="Views\NxbNew\" />
   </ItemGroup>
   <ItemGroup>

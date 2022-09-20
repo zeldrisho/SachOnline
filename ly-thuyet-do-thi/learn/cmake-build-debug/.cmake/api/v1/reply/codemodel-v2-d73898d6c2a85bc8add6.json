@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "learn",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ds-canh-thanh-ds-ke::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ds-canh-thanh-ds-ke-Debug-9a36159a5977c04d2dbf.json",
+					"name" : "ds-canh-thanh-ds-ke",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ds-canh-thanh-ma-tran-ke::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ds-canh-thanh-ma-tran-ke-Debug-fddb8d1a9872201ff533.json",
+					"name" : "ds-canh-thanh-ma-tran-ke",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ma-tran-ke-thanh-ds-canh::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ma-tran-ke-thanh-ds-canh-Debug-16a9d60a953ad2a1fbe4.json",
+					"name" : "ma-tran-ke-thanh-ds-canh",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug",
+		"source" : "D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

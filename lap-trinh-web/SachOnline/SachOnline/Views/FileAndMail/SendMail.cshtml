@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SendMail</title>
+</head>
+<body>
+    <h3>Send email with attachment</h3>
+    <div>
+        <form action="/FileAndMail/SendMail" name="SendMail" method="post" enctype="multipart/form-data">
+            <div>Form: </div>
+            <input type="email" name="Form" required value="" />
+            <div>To: </div>
+            <input type="email" name="To" required value="" />
+            <div>Subject: </div>
+            <input type="text" name="Subject" required value="" />
+            <div>Notes: </div>
+            <textarea name="Notes" rows="4"></textarea>
+            <div>Attachment: </div>
+            <input type="file" name="Attachment" value="" />
+            <hr />
+            <input type="submit" name="" value="Send" />
+        </form>
+    </div>
+</body>
+</html>
