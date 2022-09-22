@@ -33,11 +33,13 @@
                 <td align="center">@string.Format("{0:#,##0,0}", item.dDonGia)</td>
                 <td align="center">@string.Format("{0:#,##0,0}", item.dThanhTien)</td>
                 <td>
-                    <a href="@Url.Action("ChiTietSach", "Home", new { id = item.iMaSach })">Chi tiết</a>
+                    <a href="@Url.Action("ChiTietSach", "Home", new { id = item.iMaSach })" class="btn btn-primary">Chi tiết</a>
                 </td>
-                <td>@Html.ActionLink("Xoá", "XoaSPKhoiGioHang", new { @iMaSach = item.iMaSach })</td>
                 <td>
-                    <input type="submit" value="Cập nhật" />
+                    @Html.ActionLink("Xoá", "XoaSPKhoiGioHang", new { @iMaSach = item.iMaSach }, new { @class = "btn btn-danger text-decoration-none text-white" })
+                </td>
+                <td>
+                    <input type="submit" value="Cập nhật" class="btn btn-warning" />
                 </td>
             }
         </tr>
