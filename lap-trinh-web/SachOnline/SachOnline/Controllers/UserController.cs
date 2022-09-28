@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using SachOnline.Models;
 
 namespace SachOnline.Controllers
@@ -110,6 +111,7 @@ namespace SachOnline.Controllers
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
+                    Session["HoTen"] = kh.HoTen;
                     if (Session["GioHang"] != null)
                     {
                         return RedirectToAction("DatHang", "GioHang");
@@ -120,6 +122,13 @@ namespace SachOnline.Controllers
                     ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
                 }
             }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult DangXuat()
+        {
+            Session["TaiKhoan"] = null;
+            Session["HoTen"] = null;
             return RedirectToAction("Index", "Home");
         }
     }

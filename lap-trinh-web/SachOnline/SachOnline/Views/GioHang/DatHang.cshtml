@@ -4,6 +4,7 @@
     ViewBag.Title = "ĐƠN ĐẶT HÀNG";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
 <h2 style="text-align:center">THÔNG TIN ĐƠN HÀNG</h2>
 <table align="center" border="1">
     <tr style="text-align:center; font-weight:bold;">
@@ -79,22 +80,14 @@
                 <input type="date" name="NgayGiao" />
             </td>
         </tr>
-        <tr>
-            <td>
-                <input class="form-check-input" type="radio" name="thanhToan" id="momo">
-                <label class="form-check-label" for="momo">
-                    Thanh toán bằng Momo
-                </label>
-                <input class="form-check-input" type="radio" name="thanhToan" id="tienMat">
-                <label class="form-check-label" for="tienMat">
-                    Thanh toán bằng tiền mặt
-                </label>
-            </td>
-        </tr>
         <tr style="height:40px;">
             <td></td>
             <td>
-                <input type="submit" value="ĐẶT HÀNG" class="btn btn-primary" />
+                <br />
+                <a href="@Url.Action("Payment", "GioHang")" class="btn btn-primary">Thanh toán qua Momo</a>
+                <br />
+                <br />
+                <input type="submit" value="Thanh toán bằng tiền mặt" class="btn btn-secondary" />
             </td>
         </tr>
     }

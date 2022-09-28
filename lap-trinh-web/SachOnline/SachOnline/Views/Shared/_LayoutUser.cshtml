@@ -53,10 +53,16 @@
     @RenderSection("SachBanNhieu", required: false)
 
     <footer class="container well">
-        <div class="text-center">
-            <p>&copy; @DateTime.Now.Year - Nhà sách ABC. Alright Reserved</p>
-            <p>Website được phát triển để sử dụng làm bài tập thực hành môn Lập trình Web</p>
-            <p>Email: 2024801030101@student.tdmu.edu.vn</p>
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-6 text-center">
+                <p>&copy; @DateTime.Now.Year - Nhà sách ABC. Alright Reserved</p>
+                <p>Website được phát triển để sử dụng làm bài tập thực hành môn Lập trình Web</p>
+                <p>Email: 2024801030101@student.tdmu.edu.vn</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                <h5>Số lượng truy cập: @ApplicationInstance.Application["HitCounter"]</h5>
+                <h5>Số lượng online: @ApplicationInstance.Application["Online"]</h5>
+            </div>
         </div>
     </footer>
 

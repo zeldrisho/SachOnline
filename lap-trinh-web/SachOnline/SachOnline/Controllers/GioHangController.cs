@@ -4,7 +4,10 @@ using System.Linq;
 using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json.Linq;
 using SachOnline.Models;
+using SachOnline.Momo;
 
 namespace SachOnline.Controllers
 {
@@ -162,6 +165,102 @@ namespace SachOnline.Controllers
         public ActionResult XacNhanDonHang()
         {
             return View();
+        }
+
+        public ActionResult Payment()
+        {
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOCJKB20220928";
+            string accessKey = "9RSPhTi8yVQssm5Z";
+            string serectkey = "plIPmmBjkkj89fZtFDvrmKO35WCyAMZg";
+            string orderInfo = "test";
+            string returnUrl = "https://localhost:44336/GioHang/XacNhanDonHang";
+            string notifyurl = "https://6f06-125-235-232-152.ap.ngrok.io/GioHang/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = TongTien().ToString();
+            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+        //Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán
+        //errorCode = 0 : thanh toán thành công(Request.QueryString["errorCode"])
+        //Tham khảo bảng mã lỗi tại: https://developers.momo.vn/#/docs/aio/?id=b%e1%ba%a3ng-m%c3%a3-l%e1%bb%97i
+        public ActionResult XacNhanDonHang(Result result)
+        {
+            //lấy kết quả Momo trả về và hiển thị thông báo cho người dùng (có thể lấy dữ liệu ở đây cập nhật xuống db)
+            string rMessage = result.message;
+            string rOrderId = result.orderId;
+            string rErrorCode = result.errorCode; // = 0: thanh toán thành công
+            return View();
+        }
+
+        [HttpPost]
+        public void SavePayment()
+        {
+            //cập nhật dữ liệu vào db
+            DONDATHANG ddh = new DONDATHANG();
+            KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+            List<GioHang> lstGioHang = LayGioHang();
+            ddh.MaKH = kh.MaKH;
+            ddh.NgayDat = DateTime.Now;
+            //var ngayGiao = string.Format("{0:MM/dd/yyyy}", f["NgayGiao"]);
+            //ddh.NgayGiao = DateTime.Parse(ngayGiao);
+            ddh.TinhTrangGiaoHang = 1;
+            ddh.DaThanhToan = false;
+            db.DONDATHANGs.InsertOnSubmit(ddh);
+            db.SubmitChanges();
+            foreach (var item in lstGioHang)
+            {
+                CHITIETDATHANG ctdh = new CHITIETDATHANG();
+                ctdh.MaDonHang = ddh.MaDonHang;
+                ctdh.MaSach = item.iMaSach;
+                ctdh.SoLuong = item.iSoLuong;
+                ctdh.DonGia = (decimal)item.dDonGia;
+                db.CHITIETDATHANGs.InsertOnSubmit(ctdh);
+            }
+            db.SubmitChanges();
+            Session["GioHang"] = null;
         }
     }
 }
