@@ -1,4 +1,4 @@
-C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/giatrung2012/scoop/apps/clion/current/IDE/bin/ninja/win/ninja.exe -G Ninja -S D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH2-cung-co -B D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH2-cung-co\cmake-build-debug
+C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH2-cung-co -B D:\workspace\bai-thuc-hanh\ly-thuyet-do-thi\BTH2-cung-co\cmake-build-debug
 -- The C compiler identification is GNU 11.2.0
 -- The CXX compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
