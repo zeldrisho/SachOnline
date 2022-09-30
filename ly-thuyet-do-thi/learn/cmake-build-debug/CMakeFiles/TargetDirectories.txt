@@ -1,5 +1,0 @@
-D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug/CMakeFiles/ds-canh-thanh-ma-tran-ke.dir
-D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug/CMakeFiles/ds-canh-thanh-ds-ke.dir
-D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug/CMakeFiles/ma-tran-ke-thanh-ds-canh.dir
-D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/workspace/bai-thuc-hanh/ly-thuyet-do-thi/learn/cmake-build-debug/CMakeFiles/rebuild_cache.dir

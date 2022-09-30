@@ -1,3 +1,0 @@
-C:\Users\giatrung2012\scoop\apps\clion\2022.2.3-222.4167.35\IDE\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\BTH2_Cau2.dir/objects.a
-C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\mingw\bin\ar.exe qc CMakeFiles\BTH2_Cau2.dir/objects.a @CMakeFiles\BTH2_Cau2.dir\objects1.rsp
-C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\BTH2_Cau2.dir/objects.a -Wl,--no-whole-archive -o BTH2_Cau2.exe -Wl,--out-implib,libBTH2_Cau2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\BTH2_Cau2.dir\linklibs.rsp

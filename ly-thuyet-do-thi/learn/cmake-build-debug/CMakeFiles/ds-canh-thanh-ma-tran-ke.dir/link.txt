@@ -1,3 +1,0 @@
-C:\Users\giatrung2012\scoop\apps\clion\2022.2.3-222.4167.35\IDE\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\ds-canh-thanh-ma-tran-ke.dir/objects.a
-C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\mingw\bin\ar.exe qc CMakeFiles\ds-canh-thanh-ma-tran-ke.dir/objects.a @CMakeFiles\ds-canh-thanh-ma-tran-ke.dir\objects1.rsp
-C:\Users\giatrung2012\scoop\apps\clion\current\IDE\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\ds-canh-thanh-ma-tran-ke.dir/objects.a -Wl,--no-whole-archive -o ds-canh-thanh-ma-tran-ke.exe -Wl,--out-implib,libds-canh-thanh-ma-tran-ke.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ds-canh-thanh-ma-tran-ke.dir\linklibs.rsp

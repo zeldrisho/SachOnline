@@ -162,21 +162,22 @@ namespace SachOnline.Controllers
             return RedirectToAction("XacNhanDonHang", "GioHang");
         }
 
-        public ActionResult XacNhanDonHang()
-        {
-            return View();
-        }
+        //public ActionResult XacNhanDonHang()
+        //{
+        //    return View();
+        //}
 
         public ActionResult Payment()
         {
+            List<GioHang> lstGioHang = LayGioHang();
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
             string partnerCode = "MOMOCJKB20220928";
             string accessKey = "9RSPhTi8yVQssm5Z";
             string serectkey = "plIPmmBjkkj89fZtFDvrmKO35WCyAMZg";
-            string orderInfo = "test";
+            string orderInfo = "DH" + DateTime.Now.ToString("yyyyMMddHHmmss");
             string returnUrl = "https://localhost:44336/GioHang/XacNhanDonHang";
-            string notifyurl = "https://6f06-125-235-232-152.ap.ngrok.io/GioHang/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+            string notifyurl = "https://6f06-125-235-232-152.ap.ngrok.io/GioHang/DatHang"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = TongTien().ToString();
             string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
@@ -238,29 +239,29 @@ namespace SachOnline.Controllers
         [HttpPost]
         public void SavePayment()
         {
-            //cập nhật dữ liệu vào db
-            DONDATHANG ddh = new DONDATHANG();
-            KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
-            List<GioHang> lstGioHang = LayGioHang();
-            ddh.MaKH = kh.MaKH;
-            ddh.NgayDat = DateTime.Now;
-            //var ngayGiao = string.Format("{0:MM/dd/yyyy}", f["NgayGiao"]);
-            //ddh.NgayGiao = DateTime.Parse(ngayGiao);
-            ddh.TinhTrangGiaoHang = 1;
-            ddh.DaThanhToan = false;
-            db.DONDATHANGs.InsertOnSubmit(ddh);
-            db.SubmitChanges();
-            foreach (var item in lstGioHang)
-            {
-                CHITIETDATHANG ctdh = new CHITIETDATHANG();
-                ctdh.MaDonHang = ddh.MaDonHang;
-                ctdh.MaSach = item.iMaSach;
-                ctdh.SoLuong = item.iSoLuong;
-                ctdh.DonGia = (decimal)item.dDonGia;
-                db.CHITIETDATHANGs.InsertOnSubmit(ctdh);
-            }
-            db.SubmitChanges();
-            Session["GioHang"] = null;
+            ////cập nhật dữ liệu vào db
+            //DONDATHANG ddh = new DONDATHANG();
+            //KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+            //List<GioHang> lstGioHang = LayGioHang();
+            //ddh.MaKH = kh.MaKH;
+            //ddh.NgayDat = DateTime.Now;
+            ////var ngayGiao = string.Format("{0:MM/dd/yyyy}", f["NgayGiao"]);
+            ////ddh.NgayGiao = DateTime.Parse(ngayGiao);
+            //ddh.TinhTrangGiaoHang = 1;
+            //ddh.DaThanhToan = false;
+            //db.DONDATHANGs.InsertOnSubmit(ddh);
+            //db.SubmitChanges();
+            //foreach (var item in lstGioHang)
+            //{
+            //    CHITIETDATHANG ctdh = new CHITIETDATHANG();
+            //    ctdh.MaDonHang = ddh.MaDonHang;
+            //    ctdh.MaSach = item.iMaSach;
+            //    ctdh.SoLuong = item.iSoLuong;
+            //    ctdh.DonGia = (decimal)item.dDonGia;
+            //    db.CHITIETDATHANGs.InsertOnSubmit(ctdh);
+            //}
+            //db.SubmitChanges();
+            //Session["GioHang"] = null;
         }
     }
 }
