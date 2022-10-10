@@ -23,18 +23,45 @@
         @using (Html.BeginForm())
         {
             @Html.ValidationSummary(true)
+            if (Request.Cookies["TenDN"] != null && Request.Cookies["MatKhau"] != null)
+            {
+                <tr>
+                    <td>Tên đăng nhập: </td>
+                    <td>
+                        @Html.TextBox("TenDN", Request.Cookies["TenDN"].Value)
+                        @ViewData["Err1"]
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu: </td>
+                    <td>
+                        @Html.Password("MatKhau", Request.Cookies["MatKhau"].Value)
+                        @ViewData["Err2"]
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>Tên đăng nhập: </td>
+                    <td>
+                        @Html.TextBox("TenDN")
+                        @ViewData["Err1"]
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu: </td>
+                    <td>
+                        @Html.Password("MatKhau")
+                        @ViewData["Err2"]
+                    </td>
+                </tr>
+            }
             <tr>
-                <td>Tên đăng nhập: </td>
+                <td></td>
                 <td>
-                    @Html.TextBox("TenDN")
-                    @ViewData["Err1"]
-                </td>
-            </tr>
-            <tr>
-                <td>Mật khẩu: </td>
-                <td>
-                    @Html.Password("MatKhau")
-                    @ViewData["Err2"]
+                    @Html.CheckBox("remember") 
+                    <span style="font-style:italic">Nhớ tài khoản</span>
                 </td>
             </tr>
             <tr>

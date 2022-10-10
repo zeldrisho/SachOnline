@@ -1,0 +1,32 @@
+﻿@using SachOnline.Models
+
+@{
+    KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+}
+
+@if (Session["TaiKhoan"] == null) //Giao diện Login
+{
+    <li>
+        <a href="@Url.Action("DangKy", "User")">
+            <span class="glyphicon glyphicon-user"></span> Đăng ký
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("DangNhap", "User")">
+            <span class="glyphicon glyphicon-log-in"></span> Đăng nhập
+        </a>
+    </li>
+}
+else //Giao diện Logout
+{
+    <li>
+        <a href="#">
+            <span class="glyphicon glyphicon-user"></span> Xin chào: @kh.HoTen
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("DangXuat", "User")">
+            <span class="glyphicon glyphicon-log-out"></span> Đăng xuất
+        </a>
+    </li>
+}

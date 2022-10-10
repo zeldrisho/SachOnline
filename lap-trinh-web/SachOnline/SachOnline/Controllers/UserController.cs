@@ -111,8 +111,19 @@ namespace SachOnline.Controllers
                 {
                     ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
                     Session["TaiKhoan"] = kh;
-                    Session["HoTen"] = kh.HoTen;
-                    if (Session["GioHang"] != null)
+                    if (collection["remember"].Contains("true"))
+                    {
+                        Response.Cookies["TenDN"].Value = sTenDN;
+                        Response.Cookies["MatKhau"].Value = sMatKhau;
+                        Response.Cookies["TenDN"].Expires = DateTime.Now.AddDays(1);
+                        Response.Cookies["MatKhau"].Expires = DateTime.Now.AddDays(1);
+                    }
+                    else
+                    {
+                        Response.Cookies["TenDN"].Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies["MatKhau"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                    if (!string.IsNullOrEmpty(Session["GioHang"] as string)) 
                     {
                         return RedirectToAction("DatHang", "GioHang");
                     }
@@ -128,7 +139,6 @@ namespace SachOnline.Controllers
         public ActionResult DangXuat()
         {
             Session["TaiKhoan"] = null;
-            Session["HoTen"] = null;
             return RedirectToAction("Index", "Home");
         }
     }

@@ -1,7 +1,7 @@
 ﻿@*Khai báo để sử dụng chức năng phân trang*@
 @using SachOnline.Models
 @using PagedList.Mvc;
-@model IEnumerable<SachOnline.Models.SACH>
+@model PagedList.PagedList<SachOnline.Models.SACH>
 
 @*Xây dựn một helper tùy chỉnh để cắt độ dài chuỗi*@
 @helper Truncate(string s, int length)
@@ -24,7 +24,7 @@
 <h2 style="text-align:center;">QUẢN LÝ THÔNG TIN SÁCH</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới", "Create")
 </p>
 <table class="table">
     <tr>
@@ -64,7 +64,7 @@
             </td>
             <td>
                 @*Sử dụng helper để cắt MoTa lấy 70 ký tự*@
-                @Html.Raw(Truncate(item.MoTa,70).ToString())
+                @Html.Raw(Truncate(item.MoTa, 190).ToString())
             </td>
             <td>
                 <img src="~/Images/@item.AnhBia" style="width:50px;" />
@@ -95,9 +95,9 @@
 
 </table>
 
-@*Tạo iên kết phần trang*@
-@*Trang @(Model.PageCount < Model.PageNumber ? 0 :
-Model.PageNumber)/@Model.PageCount
+@*Tạo iên kết phần trang
+    Trang @(Model.PageCount < Model.PageNumber ? 0 :
+    Model.PageNumber)/@Model.PageCount*@
 <div class="MenuTrang">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
 </div>
@@ -106,4 +106,4 @@ Model.PageNumber)/@Model.PageCount
         display: inline;
         text-align: center;
     }
-</style>*@
+</style>

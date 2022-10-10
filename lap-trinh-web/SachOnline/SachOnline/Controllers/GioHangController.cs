@@ -124,7 +124,7 @@ namespace SachOnline.Controllers
             {
                 return RedirectToAction("DangNhap", "User");
             }
-            if (Session["GioHang"] == null)
+            if (!string.IsNullOrEmpty(Session["GioHang"] as string))
             {
                 return RedirectToAction("Index", "Home");
             }

@@ -1,16 +1,13 @@
 ﻿@model SachOnline.Models.SACH
+
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <h2>ĐIỀU CHỈNH THÔNG TIN SÁCH</h2>
 @*Thêm thuộc tính cho form để upload ảnh*@
-18
-@using (Html.BeginForm("Edit", "Sach", FormMethod.Post, new
-{
-    @enctype =
-"multipart/form-data"
-}))
+@using (Html.BeginForm("Edit", "Sach", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">

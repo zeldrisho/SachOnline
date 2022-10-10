@@ -7,6 +7,7 @@ using SachOnline.Models;
 using PagedList;
 using PagedList.Mvc;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace SachOnline.Controllers
 {
@@ -32,11 +33,12 @@ namespace SachOnline.Controllers
         }
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            // Lay 6 quyen sach moi
-            var listSachMoi = LaySachMoi(6);
-            return View(listSachMoi);
+            int pageSize = 6;
+            int pageNum = (page ?? 1);
+            var listSachMoi = LaySachMoi(20);
+            return View(listSachMoi.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult ChuDePartial()
@@ -59,20 +61,20 @@ namespace SachOnline.Controllers
 
         public ActionResult SachTheoCD(int id, int? page)
         {
-            //ViewBag.MaCD = iMaCD;
-            //int iSize = 3;
-            //int iPageNum = (page ?? 1);
-            //var sach = data.SACHes.Where(s => s.MaCD == iMaCD);
-            //return View(sach.ToPagedList(iPageNum, iSize));
-
+            ViewBag.MaCD = id;
+            int pageSize = 3;
+            int pageNum = (page ?? 1);
             var sach = data.SACHes.Where(s => s.MaCD == id);
-            return View(sach);
+            return View(sach.ToPagedList(pageNum, pageSize));
         }
 
-        public ActionResult SachTheoNXB(int id)
+        public ActionResult SachTheoNXB(int id, int? page)
         {
+            ViewBag.MaNXB = id;
+            int pageSize = 3;
+            int pageNum = (page ?? 1);
             var sach = data.SACHes.Where(s => s.MaNXB == id);
-            return View(sach);
+            return View(sach.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult ChiTietSach(int id)
@@ -123,6 +125,11 @@ namespace SachOnline.Controllers
         {
             var list = data.MENUs.ToList();
             return list;
+        }
+
+        public ActionResult LoginLogoutPartial()
+        {
+            return PartialView();
         }
     }
 }

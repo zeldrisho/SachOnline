@@ -17,7 +17,6 @@ namespace SachOnline
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                //Thêm hàng sau để tránh xung đột giữa các controller Home
                 namespaces: new[] { "SachOnline.Controllers" }
             );
         }

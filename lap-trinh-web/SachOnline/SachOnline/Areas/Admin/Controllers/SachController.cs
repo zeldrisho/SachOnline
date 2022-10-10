@@ -17,9 +17,9 @@ namespace SachOnline.Areas.Admin.Controllers
         // GET: Admin/Sach
         public ActionResult Index(int? page)
         {
-            int iPageNum = (page ?? 1);
-            int iPageSize = 7;
-            return View(db.SACHes.ToList().OrderBy(n => n.MaSach).ToPagedList(iPageNum, iPageSize));
+            int pageNum = (page ?? 1);
+            int pageSize = 7;
+            return View(db.SACHes.ToList().OrderBy(n => n.MaSach).ToPagedList(pageNum, pageSize));
         }
 
         [HttpGet]

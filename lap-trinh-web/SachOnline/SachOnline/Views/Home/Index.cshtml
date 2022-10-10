@@ -1,9 +1,18 @@
-﻿@model IEnumerable<SachOnline.Models.SACH>
+﻿@using SachOnline.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
 
 @{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>
 
 <h2 class="text-center">SÁCH MỚI</h2>
 <hr />
@@ -28,17 +37,9 @@
     }
 </div>
 
-<nav class="text-center">
-    <ul class="pagination">
-        <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li class="disabled"><a href="#">5</a></li>
-        <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
-    </ul>
-</nav>
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
 
 @section SachBanNhieu {
     @Html.Action("SachBanNhieuPartial", "Home")

@@ -1,17 +1,19 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-
-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
 </head>
 <body>
     <nav class="navbar navbar-inverse">
+        <!--navbar-fixed-top-->
         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#navAdmin" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navAdmin" aria-expanded="false">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -20,6 +22,9 @@ scale=1">
                     SachOnlineAdmin
                 </a>
             </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling
+            (Chứa nội dung của navbar) -->
             <div class="collapse navbar-collapse" id="navAdmin">
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Action("Index","Sach")">QUẢN LÝ SÁCH</a> </li>
@@ -41,19 +46,26 @@ scale=1">
                     </li>
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container-->
     </nav>
+
     <div class="container">
         @RenderBody()
     </div>
+
     <footer class="container well">
         <div style="text-align:center;">
             <p>ADMIN</p>
         </div>
     </footer>
 
-    @Scripts.Render("~/Scripts/js")
-    <script src="~/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({ selector: 'textarea' })</script>
+    <!-- jQuery library -->
+    @Scripts.Render("~/bundles/jquery")
+    <!-- Latest compiled JavaScript -->
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- Custom scripts -->
+    @RenderSection("customScripts", required: false)
 </body>
 </html>
