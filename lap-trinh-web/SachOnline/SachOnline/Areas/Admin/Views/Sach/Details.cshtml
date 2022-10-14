@@ -5,12 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<style type="text/css">
-    img {
-        width: 200px;
-        margin-bottom: 20px;
-    }
-</style>
+@section customStyles {
+    <style>
+        img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+}
 
 <h2 style="text-align:center">CHI TIẾT SÁCH</h2>
 <div>
@@ -26,8 +28,7 @@
             Mô tả:
         </dt>
         <dd>
-            @Html.Raw(@Model.MoTa.ToString().Replace("\n",
-            "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+            @Html.Raw(@Model.MoTa.ToString())
         </dd>
         <dt>
             Ảnh

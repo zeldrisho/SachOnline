@@ -1,19 +1,30 @@
 ﻿@model SachOnline.Models.SACH
+
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<style type="text/css">
-    img {
-        width: 200px;
-        margin-bottom: 20px;
-    }
 
-    h3, h4 {
-        color: red;
-        font-weight: bold;
-    }
-</style>
+@section customStyles {
+    <style>
+        img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        h3, h4 {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+}
+
+@section customScripts {
+    <script>
+        $('#alertBox').removeClass('hide');
+        $('#alertBox').delay(7500).slideUp(500);
+    </script>
+}
 
 <h2>XÁC NHẬN THÔNG TIN CẦN XÓA</h2>
 <h3>Bạn quyết định xóa quyển sách này?</h3>
@@ -25,8 +36,7 @@
         <dd>@Html.DisplayFor(model => model.TenSach) </dd>
         <dt> Mô tả: </dt>
         <dd>
-            @Html.Raw(@Model.MoTa.ToString().Replace("\n",
-       "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+            @Html.Raw(@Model.MoTa.ToString())
         </dd>
         <dt> Ảnh bìa: </dt>
         <dd> <img src="~/Images/@Model.AnhBia" alt=" @Model.TenSach"> </dd>

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <!-- Custom styles -->
+    @RenderSection("customStyles", required: false)
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -52,6 +54,13 @@
     </nav>
 
     <div class="container">
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="alertBox" class="alert @TempData["AlertType"] hide">
+                @TempData["AlertMessage"]
+            </div>
+        }
+
         @RenderBody()
     </div>
 

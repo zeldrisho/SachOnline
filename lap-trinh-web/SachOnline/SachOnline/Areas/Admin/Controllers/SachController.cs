@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
-    public class SachController : Controller
+    public class SachController : BaseController
     {
         DbSachOnlineDataContext db = new DbSachOnlineDataContext();
 
@@ -19,7 +19,7 @@ namespace SachOnline.Areas.Admin.Controllers
         {
             int pageNum = (page ?? 1);
             int pageSize = 7;
-            return View(db.SACHes.ToList().OrderBy(n => n.MaSach).ToPagedList(pageNum, pageSize));
+            return View(db.SACHes.ToList().OrderByDescending(n => n.NgayCapNhat).ToPagedList(pageNum, pageSize));
         }
 
         [HttpGet]
@@ -70,7 +70,7 @@ namespace SachOnline.Areas.Admin.Controllers
                     }
                     //Lưu Sach vào CSDL
                     sach.TenSach = f["sTenSach"];
-                    sach.MoTa = f["sMoTa"].Replace("<p>", "").Replace("</p>", "\n");
+                    sach.MoTa = f["sMoTa"];
                     sach.AnhBia = sFileName;
                     sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
                     sach.SoLuongBan = int.Parse(f["iSoLuong"]);
@@ -122,8 +122,8 @@ namespace SachOnline.Areas.Admin.Controllers
             if (ctdh.Count() > 0)
             {
                 //Nội dung sẽ hiển thị khi sách cần xóa đã có trong table ChiTietDonHang
-                ViewBag.ThongBao = "Sách này đang có trong bảng Chi tiết đặt hàng <br>" +
-                " Nếu muốn xóa thì phải xóa hết mã sách này trong bảng Chi tiết đặt hàng";
+                //ViewBag.ThongBao = "Sách này đang có trong bảng Chi tiết đặt hàng <br>" + " Nếu muốn xóa thì phải xóa hết mã sách này trong bảng Chi tiết đặt hàng";
+                SetAlert("Sách này đang có trong bảng Chi tiết đặt hàng. Nếu muốn xóa thì phải xóa hết mã sách này trong bảng Chi tiết đặt hàng", "danger");
                 return View(sach);
             }
             //Xóa hết thông tin của cuốn sách trong table VietSach trước khi xóa sách này
@@ -183,7 +183,7 @@ namespace SachOnline.Areas.Admin.Controllers
                 }
                 //Lưu Sach vào CSDL
                 sach.TenSach = f["sTenSach"];
-                sach.MoTa = f["sMoTa"].Replace("<p>", "").Replace("</p>", "\n");
+                sach.MoTa = f["sMoTa"];
                 sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
                 sach.SoLuongBan = int.Parse(f["iSoLuong"]);
                 sach.GiaBan = decimal.Parse(f["mGiaBan"]);
@@ -194,6 +194,30 @@ namespace SachOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View(sach);
+        }
+
+        public ActionResult Search(string strSearch)
+        {
+            ViewBag.Search = strSearch;
+            if (string.IsNullOrEmpty(strSearch))
+            {
+                return View();
+            }
+            var kq = db.SACHes.Where(s => s.TenSach.Contains(strSearch));
+            //var kq = data.SACHes.Where(s => s.MaCD == int.Parse(strSearch));
+            //var kq = data.SACHes.Where(s => (s.SoLuongBan >= 5 && s.SoLuongBan <= 10));
+            //var kq = data.SACHes.Where(s => (
+            //    s.MaSach == int.Parse(strSearch) ||
+            //    s.TenSach.Contains(strSearch) ||
+            //    s.MoTa.Contains(strSearch) ||
+            //    s.SoLuongBan == int.Parse(strSearch) ||
+            //    s.MaCD == int.Parse(strSearch) ||
+            //    s.MaNXB == int.Parse(strSearch)
+            //));
+            //var kq = data.SACHes.Where(s => (s.SoLuongBan >= 5 && s.SoLuongBan <= 10)).OrderBy(s => s.SoLuongBan);
+            //var kq = data.SACHes.Where(s => (s.SoLuongBan >= 5 && s.SoLuongBan <= 10)).OrderByDescending(s => s.SoLuongBan);
+            ViewBag.Kq = kq.Count();
+            return View(kq);
         }
     }
 }

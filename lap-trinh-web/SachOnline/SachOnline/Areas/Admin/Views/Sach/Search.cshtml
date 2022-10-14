@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SachOnline.Models.SACH>
+
+@helper Truncate(string s, int length)
+{
+    if (s.Length < length)
+    {
+        @s
+    }
+    else
+    {
+        @s.Substring(0, length)<text>...</text>
+    }
+}
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Search", "Sach", FormMethod.Get, new { @class = "navbar-form", @role = "search" }))
+{
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Tìm kiếm" name="strSearch" value="@ViewBag.Search" />
+    </div>
+    <button type="submit" class="btn btn-default">Tìm</button>
+}
+
+@{
+    if (Model != null)
+    {
+        <h2>Tìm thấy @ViewBag.Kq kết quả</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenSach)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GiaBan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnhBia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayCapNhat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoLuongBan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaCD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaNXB)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Truncate(item.TenSach, 50)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GiaBan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnhBia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayCapNhat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuongBan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaCD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaNXB)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.MaSach })" class="btn btn-warning" role="button">Sửa</a>
+                        <a href="@Url.Action("Details", new { id = item.MaSach })" class="btn btn-info" role="button">Chi tiết</a>
+                        <a href="@Url.Action("Delete", new { id = item.MaSach })" class="btn btn-danger" role="button">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}

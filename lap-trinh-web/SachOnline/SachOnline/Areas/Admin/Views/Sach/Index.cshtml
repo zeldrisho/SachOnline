@@ -21,18 +21,28 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align:center;">QUẢN LÝ THÔNG TIN SÁCH</h2>
+@section customScripts {
+    <script>
+        $('#alertBox').removeClass('hide');
+        $('#alertBox').delay(7500).slideUp(500);
+    </script>
+}
 
-<p>
-    @Html.ActionLink("Thêm mới", "Create")
-</p>
+<h2 style="text-align:center;">QUẢN LÝ THÔNG TIN SÁCH</h2>
+<a href="@Url.Action("Create")" class="btn btn-primary form-inline" role="button">Thêm mới</a>
+
+@using (Html.BeginForm("Search", "Sach", FormMethod.Get, new { @class = "navbar-form navbar-right", @role = "search" }))
+{
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Tìm kiếm" name="strSearch">
+    </div>
+    <button type="submit" class="btn btn-default">Tìm</button>
+}
+
 <table class="table">
     <tr>
         <th style="text-align:center;width:140px">
             Tên sách
-        </th>
-        <th style="text-align:center;width:200px">
-            Mô tả
         </th>
         <th style="text-align:center;width:80px">
             @Html.DisplayNameFor(model => model.First().AnhBia)
@@ -63,10 +73,6 @@
                 @Truncate(item.TenSach, 50)
             </td>
             <td>
-                @*Sử dụng helper để cắt MoTa lấy 70 ký tự*@
-                @Html.Raw(Truncate(item.MoTa, 190).ToString())
-            </td>
-            <td>
                 <img src="~/Images/@item.AnhBia" style="width:50px;" />
             </td>
             <td>
@@ -87,7 +93,7 @@
             </td>
             <td>
                 <a href="@Url.Action("Edit", new { id = item.MaSach })" class="btn btn-warning" role="button">Sửa</a>
-                <a href="@Url.Action("Details", new { id = item.MaSach })" class="btn btn-primary" role="button">Chi tiết</a>
+                <a href="@Url.Action("Details", new { id = item.MaSach })" class="btn btn-info" role="button">Chi tiết</a>
                 <a href="@Url.Action("Delete", new { id = item.MaSach })" class="btn btn-danger" role="button">Xóa</a>
             </td>
         </tr>

@@ -5,11 +5,9 @@
 }
 
 @section customScripts {
-    <script src="~/tinymce/tinymce.min.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
     <script>
-        tinymce.init({
-            selector: 'textarea'
-        });
+        CKEDITOR.replace('mota');
     </script>
 }
 
@@ -31,7 +29,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Mô tả:</label>
             <div class="col-md-10">
-<textarea name="sMoTa">@ViewBag.MoTa</textarea>
+                <textarea name="sMoTa" id="mota">@ViewBag.MoTa</textarea>
             </div>
         </div>
         <div class="form-group">
