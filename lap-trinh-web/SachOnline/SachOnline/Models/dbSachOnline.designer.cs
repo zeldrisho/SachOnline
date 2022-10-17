@@ -20,8 +20,8 @@ namespace SachOnline.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
+	using System.ComponentModel.DataAnnotations;
+
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="SachOnline")]
 	public partial class DbSachOnlineDataContext : System.Data.Linq.DataContext
 	{
@@ -1212,6 +1212,8 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaKH", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[Key]
+		[Required]
 		public int MaKH
 		{
 			get
@@ -1232,6 +1234,7 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[Required(ErrorMessage = "Họ tên không được để trống.")]
 		public string HoTen
 		{
 			get
@@ -1252,6 +1255,8 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaiKhoan", DbType="VarChar(15)")]
+		[MinLength(5, ErrorMessage = "Tên đăng nhập phải ít nhất 5 ký tự.")]
+		[Required(ErrorMessage = "Tên đăng nhập không được để trống.")]
 		public string TaiKhoan
 		{
 			get
@@ -1272,7 +1277,9 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string MatKhau
+        [Required(ErrorMessage = "Mật khẩu không được để trống.")]
+		[StringLength(15, MinimumLength = 6, ErrorMessage = "Mật khẩu phải từ 6 tới 15 ký tự.")]
+        public string MatKhau
 		{
 			get
 			{
@@ -1292,6 +1299,8 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		[Required(ErrorMessage = "Email không được để trống.")]
+		[EmailAddress(ErrorMessage = "Email không đúng định dạng.")]
 		public string Email
 		{
 			get
@@ -1332,7 +1341,8 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DienThoai", DbType="VarChar(10)")]
-		public string DienThoai
+		[Required(ErrorMessage = "Điện thoại không được để trống.")]
+        public string DienThoai
 		{
 			get
 			{
@@ -1352,7 +1362,8 @@ namespace SachOnline.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgaySinh", DbType="SmallDateTime")]
-		public System.Nullable<System.DateTime> NgaySinh
+		[Required(ErrorMessage = "Ngày sinh không được để trống.")]
+        public System.Nullable<System.DateTime> NgaySinh
 		{
 			get
 			{

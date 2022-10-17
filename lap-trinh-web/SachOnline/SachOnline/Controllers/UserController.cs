@@ -23,26 +23,14 @@ namespace SachOnline.Controllers
         {
             //Gan cac gia tri nguoi dung nhap du lieu cho cac bien
             var sHoTen = collection["HoTen"];
-            var sTenDN = collection["TenDN"];
+            var sTaiKhoan = collection["TaiKhoan"];
             var sMatKhau = collection["MatKhau"];
             var sMatKhauNhapLai = collection["MatKhauNL"];
             var sDiaChi = collection["DiaChi"];
             var sEmail = collection["Email"];
             var sDienThoai = collection["DienThoai"];
             var dNgaySinh = String.Format("{0:MM/dd/yyyy}", collection["NgaySinh"]);
-            if (String.IsNullOrEmpty(sHoTen))
-            {
-                ViewData["err1"] = "Họ tên không được rỗng";
-            }
-            else if (String.IsNullOrEmpty(sTenDN))
-            {
-                ViewData["err2"] = "Tên đăng nhập không được rỗng";
-            }
-            else if (String.IsNullOrEmpty(sMatKhau))
-            {
-                ViewData["err3"] = "Phải nhập mật khẩu";
-            }
-            else if (String.IsNullOrEmpty(sMatKhauNhapLai))
+            if (String.IsNullOrEmpty(sMatKhauNhapLai))
             {
                 ViewData["err4"] = "Phải nhập lại mật khẩu";
             }
@@ -50,15 +38,7 @@ namespace SachOnline.Controllers
             {
                 ViewData["err4"] = "Mật khẩu nhập lại không khớp";
             }
-            else if (String.IsNullOrEmpty(sEmail))
-            {
-                ViewData["err5"] = "Email không được rỗng";
-            }
-            else if (String.IsNullOrEmpty(sDienThoai))
-            {
-                ViewData["err6"] = "Số điện thoại không được rỗng";
-            }
-            else if (db.KHACHHANGs.SingleOrDefault(n => n.TaiKhoan == sTenDN) != null)
+            else if (db.KHACHHANGs.SingleOrDefault(n => n.TaiKhoan == sTaiKhoan) != null)
             {
                 ViewBag.ThongBao = "Tên đăng nhập đã tồn tại";
             }
@@ -70,7 +50,7 @@ namespace SachOnline.Controllers
             {
                 //Gán giá trị cho đối tượng được tạo mới (kh)
                 kh.HoTen = sHoTen;
-                kh.TaiKhoan = sTenDN;
+                kh.TaiKhoan = sTaiKhoan;
                 kh.MatKhau = sMatKhau;
                 kh.Email = sEmail;
                 kh.DiaChi = sDiaChi;

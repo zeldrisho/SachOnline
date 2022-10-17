@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-int main() {
+void dsCanhThanhDsKe() {
     ifstream ifs("ds-canh.txt");
 //    n dinh, m canh
     int n, m;
@@ -24,5 +24,4 @@ int main() {
         cout << endl;
     }
     ifs.close();
-    return 0;
 }
