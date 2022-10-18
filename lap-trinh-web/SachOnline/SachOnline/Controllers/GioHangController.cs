@@ -176,8 +176,8 @@ namespace SachOnline.Controllers
             string accessKey = "9RSPhTi8yVQssm5Z";
             string serectkey = "plIPmmBjkkj89fZtFDvrmKO35WCyAMZg";
             string orderInfo = "DH" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            string returnUrl = "https://localhost:44336/GioHang/XacNhanDonHang";
-            string notifyurl = "https://6f06-125-235-232-152.ap.ngrok.io/GioHang/DatHang"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+            string returnUrl = "http://tdmusachonline.somee.com/GioHang/XacNhanDonHang";
+            string notifyurl = "http://tdmusachonline.somee.com/GioHang/DatHang"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = TongTien().ToString();
             string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
