@@ -1,34 +1,194 @@
-﻿@model IEnumerable<SachOnline.Models.CHUDE>
-
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+@section customScripts {
+    <script>
+        $(document).ready(function () {
+            loadDsChuDe();
+        });
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenChuDe)
-        </th>
-        <th></th>
-    </tr>
+        function loadDsChuDe() {
+            $.ajax({
+                url: '/Admin/ChuDe/DsChuDe',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#tblDsChuDe').empty();
+                        $.each(data.dsCD, function (k, v) {
+                            let s = '<tr id="' + v.MaCD + '">';
+                            s += '<td>' + v.TenCD + '</td>';
+                            s += '<td class="col-ms-3 text-right">';
+                            s += '<button class="btn btn-sm btn-info" name="view"><i class="fa fa-info-circle" aria-hidden="true"></i></button>&nbsp';
+                            s += '<button class="btn btn-sm btn-warning" name="update"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                            s += '<button class="btn btn-sm btn-danger" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button';
+                            s += '</td>';
+                            s += '</tr>';
+                            $('#tblDsChuDe').append(s);
+                        })
+                    }
+                }
+            });
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenChuDe)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaCD }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaCD }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaCD })
-        </td>
-    </tr>
+        $(document).on('click', 'button[name="view"]', function () {
+            let idCD = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/ChuDe/Details',
+                type: 'get',
+                data: {
+                    maCD: idCD
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#txtTenChuDe').val(data.cd.TenCD);
+                        $('#txtTenChuDe').prop('readonly', true);
+                        $('#btnSubmit').hide();
+                        $('#modalTitle').text('Xem chi tiết chủ đề');
+                        $('#modalChuDe').modal();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $('#btnAdd').click(function () {
+            $('#modalTitle').text('Thêm mới chủ đề');
+            $('#maCD').val('');
+            $('#txtTenChuDe').val('');
+            $('#txtTenChuDe').prop('readonly', false);
+            $('#btnSubmit').show();
+            $('#modalChuDe').modal();
+        })
+
+        $(document).on('click', 'button[name="update"]', function () {
+            let idCD = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/ChuDe/Details',
+                type: 'get',
+                data: {
+                    maCD: idCD
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#txtTenChuDe').val(data.cd.TenCD);
+                        $('#txtTenChuDe').prop('readonly', false);
+                        $('#btnSubmit').show();
+                        $('#modalTitle').text('Cập nhật chủ đề');
+                        $('#maCD').val(idCD)
+                        $('#modalChuDe').modal();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', 'button[name="delete"]', function () {
+            let idCD = $(this).closest('tr').attr('id');
+            if (confirm('Xác nhận xoá chủ đề này')) {
+                $.ajax({
+                    url: '/Admin/ChuDe/Delete',
+                    type: 'post',
+                    data: {
+                        maCD: idCD
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            loadDsChuDe();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#btnSubmit').click(function () {
+            let strTenChuDe = $('#txtTenChuDe').val().trim();
+            if (strTenChuDe.length == 0) {
+                alert('Vui lòng nhập tên chủ đề');
+                return;
+            }
+            let maCD = $('#maCD').val().trim();
+            if (maCD == 0) {
+                $.ajax({
+                    url: '/Admin/ChuDe/Create',
+                    type: 'post',
+                    data: {
+                        strTenCD: strTenChuDe
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            $('#modalChuDe').modal('hide');
+                            loadDsChuDe();
+                            $('#txtTenChuDe').val('');
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '/Admin/ChuDe/Edit',
+                    type: 'post',
+                    data: {
+                        maCD: maCD,
+                        strTenCD: strTenChuDe
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            $('#modalChuDe').modal('hide');
+                            loadDsChuDe();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 }
 
+<p>
+    <button class="btn btn-success" id="btnAdd">
+        <i class="fa fa-plus" aria-hidden="true"></i> Thêm chủ đề
+    </button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên chủ đề</th>
+            <th class="col-ms-9 text-right">Các chức năng</th>
+        </tr>
+    </thead>
+    <tbody id="tblDsChuDe"></tbody>
 </table>
+
+<div class="modal fade" id="modalChuDe" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="modalTitle"></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" id="maCD" value="" hidden />
+                        <label>Tên chủ đề</label>
+                        <input type="text" class="form-control" id="txtTenChuDe" placeholder="Tên chủ đề" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary pull-right" id="btnSubmit">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

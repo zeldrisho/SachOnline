@@ -1,115 +1,224 @@
-﻿@*Khai báo để sử dụng chức năng phân trang*@
-@using SachOnline.Models
-@using PagedList.Mvc;
-@model PagedList.PagedList<SachOnline.Models.SACH>
-
-@*Xây dựn một helper tùy chỉnh để cắt độ dài chuỗi*@
-@helper Truncate(string s, int length)
-{
-    if (s.Length < length)
-    {
-        @s
-    }
-    else
-    {
-        @s.Substring(0, length)<text>...</text>
-    }
-}
-
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@section customStyles {
+    <style>
+        .book-img {
+            width: 100px;
+        }
+    </style>
+}
+
 @section customScripts {
+    <script src="~/ckeditor/ckeditor.js"></script>
     <script>
-        $('#alertBox').removeClass('hide');
-        $('#alertBox').delay(7500).slideUp(500);
+        CKEDITOR.replace('txtMoTa');
+
+        $(document).ready(function () {
+            loadDsSach();
+        });
+
+        function loadDsSach() {
+            $.ajax({
+                url: '/Admin/Sach/DsSach',
+                type: 'get',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        $('#tblDsSach').empty();
+                        $.each(data.dsSach, function (k, v) {
+                            let s = '<tr id="' + v.MaSach + '">';
+                            let updatedDate = new Date(v.NgayCapNhat.slice(6, 19));
+                            s += '<td>' + v.TenSach + '</td>';
+                            s += '<td><img src="/Images/' + v.Anh + '" class="book-img" /></td>';
+                            s += '<td>' + updatedDate + '</td>';
+                            s += '<td>' + v.SoLuong + '</td>';
+                            s += '<td>' + v.GiaBan + '</td>';
+                            s += '<td>' + v.TenCD + '</td>';
+                            s += '<td>' + v.TenNXB + '</td>';
+                            s += '<td class="col-ms-3 text-right">';
+                            s += '<button class="btn btn-sm btn-info" name="view"><i class="fa fa-info-circle" aria-hidden="true"></i></button>&nbsp';
+                            s += '<button class="btn btn-sm btn-warning" name="update"><i class="fa fa-pen-square" aria-hidden="true"></i></button>&nbsp';
+                            s += '<button class="btn btn-sm btn-danger" name="delete"><i class="fa fa-trash" aria-hidden="true"></i></button';
+                            s += '</td>';
+                            s += '</tr>';
+                            $('#tblDsSach').append(s);
+                        })
+                    }
+                }
+            });
+        }
+
+        $(document).on('click', 'button[name="view"]', function () {
+            let idSach = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/Sach/Details',
+                type: 'get',
+                data: {
+                    maSach: idSach
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#txtTenSach').val(data.sach.TenSach);
+                        $('#txtTenSach').prop('readonly', true);
+                        $('#btnSubmit').hide();
+                        $('#txtMoTa').hide();
+                        $('#modalTitle').text('Xem chi tiết sách');
+                        $('#modalSach').modal();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $('#btnAdd').click(function () {
+            $('#modalTitle').text('Thêm mới sách');
+            $('#maSach').val('');
+            $('#txtTenSach').val('');
+            $('#txtTenSach').prop('readonly', false);
+            $('#btnSubmit').show();
+            $('#modalSach').modal();
+        })
+
+        $(document).on('click', 'button[name="update"]', function () {
+            let idSach = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/Admin/Sach/Details',
+                type: 'get',
+                data: {
+                    maSach: idSach
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#txtTenSach').val(data.sach.TenSach);
+                        $('#txtMoTa').val(data.sach.MoTa);
+                        $('#txtTenSach').prop('readonly', false);
+                        $('#btnSubmit').show();
+                        $('#modalTitle').text('Cập nhật sách');
+                        $('#maSach').val(idSach)
+                        $('#modalSach').modal();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', 'button[name="delete"]', function () {
+            let idSach = $(this).closest('tr').attr('id');
+            if (confirm('Xác nhận xoá sách này')) {
+                $.ajax({
+                    url: '/Admin/Sach/Delete',
+                    type: 'post',
+                    data: {
+                        maSach: idSach
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            loadDsSach();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#btnSubmit').click(function () {
+            let strTenSach = $('#txtTenSach').val().trim();
+            if (strTenSach.length == 0) {
+                alert('Vui lòng nhập tên sách');
+                return;
+            }
+            let maSach = $('#maSach').val().trim();
+            if (maSach == 0) {
+                $.ajax({
+                    url: '/Admin/Sach/Create',
+                    type: 'post',
+                    data: {
+                        strTenCD: strTenSach
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            $('#modalSach').modal('hide');
+                            loadDsSach();
+                            $('#txtTenSach').val('');
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '/Admin/Sach/Edit',
+                    type: 'post',
+                    data: {
+                        maSach: maSach,
+                        tenSach: tenSach,
+                        moTa: moTa
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            $('#modalSach').modal('hide');
+                            loadDsSach();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
     </script>
 }
 
-<h2 style="text-align:center;">QUẢN LÝ THÔNG TIN SÁCH</h2>
-<a href="@Url.Action("Create")" class="btn btn-primary form-inline" role="button">Thêm mới</a>
-
-@using (Html.BeginForm("Search", "Sach", FormMethod.Get, new { @class = "navbar-form navbar-right", @role = "search" }))
-{
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Tìm kiếm" name="strSearch">
-    </div>
-    <button type="submit" class="btn btn-default">Tìm</button>
-}
-
+<p>
+    <button class="btn btn-success" id="btnAdd">
+        <i class="fa fa-plus" aria-hidden="true"></i> Thêm sách
+    </button>
+</p>
 <table class="table">
-    <tr>
-        <th style="text-align:center;width:140px">
-            Tên sách
-        </th>
-        <th style="text-align:center;width:80px">
-            @Html.DisplayNameFor(model => model.First().AnhBia)
-        </th>
-        <th style="text-align:center;width:100px">
-            Ngày cập nhật
-        </th>
-        <th style="text-align:center;width:80px">
-            Số lượng
-        </th>
-        <th style="text-align:center;width:80px">
-            @Html.DisplayNameFor(model => model.First().GiaBan)
-        </th>
-        <th style="text-align:center;width:100px">
-            Chủ đề
-        </th>
-        <th style="text-align:center;width:100px">
-            Nhà xuất bản
-        </th>
-        <th style="text-align:center"></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @*Sử dụng helper để cắt TenSach lấy 50 ký tự*@
-                @Truncate(item.TenSach, 50)
-            </td>
-            <td>
-                <img src="~/Images/@item.AnhBia" style="width:50px;" />
-            </td>
-            <td>
-                @*Định dạng hiển thị*@
-                @Html.FormatValue(@item.NgayCapNhat, "{0:dd/MM/yyyy}")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuongBan)
-            </td>
-            <td>
-                @Html.FormatValue(item.GiaBan, "{0:#,##0}")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CHUDE.TenChuDe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NHAXUATBAN.TenNXB)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.MaSach })" class="btn btn-warning" role="button">Sửa</a>
-                <a href="@Url.Action("Details", new { id = item.MaSach })" class="btn btn-info" role="button">Chi tiết</a>
-                <a href="@Url.Action("Delete", new { id = item.MaSach })" class="btn btn-danger" role="button">Xóa</a>
-            </td>
+            <th>Tên sách</th>
+            <th>Ảnh</th>
+            <th>Ngày cập nhật</th>
+            <th>Số lượng</th>
+            <th>Giá bán</th>
+            <th>Tên chủ đề</th>
+            <th>Tên nhà xuất bản</th>
+            <th class="col-sm-2 text-right">Các chức năng</th>
         </tr>
-    }
-
+    </thead>
+    <tbody id="tblDsSach"></tbody>
 </table>
 
-@*Tạo iên kết phần trang
-    Trang @(Model.PageCount < Model.PageNumber ? 0 :
-    Model.PageNumber)/@Model.PageCount*@
-<div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+<div class="modal fade" id="modalSach" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="modalTitle"></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" id="maSach" value="" hidden />
+                        <label>Tên sách</label>
+                        <input type="text" class="form-control" id="txtTenSach" placeholder="Tên sách" />
+                        <label>Mô tả</label>
+                        <textarea class="form-control" id="txtMoTa"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary pull-right" id="btnSubmit">Lưu</button>
+            </div>
+        </div>
+    </div>
 </div>
-<style>
-    .MenuTrang {
-        display: inline;
-        text-align: center;
-    }
-</style>

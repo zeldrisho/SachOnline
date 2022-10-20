@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Antlr.Runtime.Tree;
+using PagedList;
 using SachOnline.Models;
 using System;
 using System.Collections.Generic;
@@ -21,85 +22,105 @@ namespace SachOnline.Areas.Admin.Controllers
             return View(db.CHUDEs.ToList().OrderBy(n => n.MaCD).ToPagedList(pageNum, pageSize));
         }
 
-        // GET: Admin/ChuDe/Create
-        public ActionResult Create()
-        {
-            ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n => n.TenNXB), "MaNXB", "TenNXB");
-            return View();
-        }
-
         // POST: Admin/ChuDe/Create
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult Create(string strTenCD)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                var cd = new CHUDE();
+                cd.TenChuDe = strTenCD;
+                db.CHUDEs.InsertOnSubmit(cd);
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Thêm chủ đề thành công" },
+                    JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return Json(new { code = 500, msg = "Thêm chủ đề thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
             }
-        }
-
-        // GET: Admin/ChuDe/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var chude = db.CHUDEs.SingleOrDefault(n => n.MaCD == id);
-            if (chude == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            //ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n =>
-            //n.TenNXB), "MaNXB", "TenNXB", chude.MaNXB);
-            return View(chude);
         }
 
         // POST: Admin/ChuDe/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int maCD, string strTenCD)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var cd = db.CHUDEs.SingleOrDefault(c => c.MaCD == maCD);
+                cd.TenChuDe = strTenCD;
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Sửa chủ đề thành công" },
+                    JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return Json(new { code = 500, msg = "Sửa chủ đề thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
             }
-        }
-
-        // GET: Admin/ChuDe/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var chude = db.CHUDEs.SingleOrDefault(n => n.MaCD == id);
-            if (chude == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            return View(chude);
         }
 
         // POST: Admin/ChuDe/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int maCD)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var cd = db.CHUDEs.SingleOrDefault(c => c.MaCD == maCD);
+                db.CHUDEs.DeleteOnSubmit(cd);
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Xoá chủ đề thành công" },
+                    JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return Json(new { code = 500, msg = "Xoá chủ đề thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult DsChuDe()
+        {
+            try
+            {
+                var dsCD = (from cd in db.CHUDEs
+                            select new
+                            {
+                                MaCD = cd.MaCD,
+                                TenCD = cd.TenChuDe
+                            }).ToList();
+                return Json(new { code = 200, dsCD = dsCD, msg = "Lấy danh sách chủ đề thành công" },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { code = 500, msg = "Lấy danh sách chủ đề thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult Details(int maCD)
+        {
+            try
+            {
+                var cd = (from s in db.CHUDEs
+                            where (s.MaCD == maCD)
+                            select new
+                            {
+                                MaCD = s.MaCD,
+                                TenCD = s.TenChuDe
+                            }).SingleOrDefault();
+                return Json(new { code = 200, cd = cd, msg = "Lấy thông tin chủ đề thành công" },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { code = 500, msg = "Lấy thông tin chủ đề thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
             }
         }
     }
