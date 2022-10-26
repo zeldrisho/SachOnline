@@ -7,6 +7,7 @@ using SachOnline.Models;
 using PagedList;
 using PagedList.Mvc;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
@@ -22,180 +23,72 @@ namespace SachOnline.Areas.Admin.Controllers
             return View(db.SACHes.ToList().OrderByDescending(n => n.NgayCapNhat).ToPagedList(pageNum, pageSize));
         }
 
-        //[HttpGet]
-        //public ActionResult Create()
-        //{
-        //    ViewBag.MaCD = new SelectList(db.CHUDEs.ToList().OrderBy(n => n.TenChuDe), "MaCD", "TenChuDe");
-        //    ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n => n.TenNXB), "MaNXB", "TenNXB");
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult Create(SACH sach, FormCollection f, HttpPostedFileBase fFileUpload)
-        //{
-        //    //Đưa dữ liệu vào DropDown
-        //    ViewBag.MaCD = new SelectList(db.CHUDEs.ToList().OrderBy(n =>
-        //    n.TenChuDe), "MaCD", "TenChuDe");
-        //    ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n =>
-        //    n.TenNXB), "MaNXB", "TenNXB");
-        //    if (fFileUpload == null)
-        //    {
-        //        //Nội dung thông báo yêu cầu chọn ảnh bìa
-        //        ViewBag.ThongBao = "Hãy chọn ảnh bìa.";
-        //        //Lưu thông tin để khi load lại trang do yêu cầu chọn ảnh bìa sẽ hiển thị
-        //        //các thông tin này lên trang
-        //        ViewBag.TenSach = f["sTenSach"];
-        //        ViewBag.MoTa = f["sMoTa"];
-        //        ViewBag.SoLuong = int.Parse(f["iSoLuong"]);
-        //        ViewBag.GiaBan = decimal.Parse(f["mGiaBan"]);
-        //        ViewBag.MaCD = new SelectList(db.CHUDEs.ToList().OrderBy(n =>
-        //        n.TenChuDe), "MaCD", "TenChuDe", int.Parse(f["MaCD"]));
-        //        ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n =>
-        //        n.TenNXB), "MaNXB", "TenNXB", int.Parse(f["MaNXB"]));
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            //Lấy tên file (Khai báo thư viện: System.IO)
-        //            var sFileName = Path.GetFileName(fFileUpload.FileName);
-        //            //Lấy đường dẫn lưu file
-        //            var path = Path.Combine(Server.MapPath("~/Images"), sFileName);
-        //            //Kiểm tra ảnh bìa đã tồn tại chưa để lưu lên thư mục
-        //            if (!System.IO.File.Exists(path))
-        //            {
-        //                fFileUpload.SaveAs(path);
-        //            }
-        //            //Lưu Sach vào CSDL
-        //            sach.TenSach = f["sTenSach"];
-        //            sach.MoTa = f["sMoTa"];
-        //            sach.AnhBia = sFileName;
-        //            sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
-        //            sach.SoLuongBan = int.Parse(f["iSoLuong"]);
-        //            sach.GiaBan = decimal.Parse(f["mGiaBan"]);
-        //            sach.MaCD = int.Parse(f["MaCD"]);
-        //            sach.MaNXB = int.Parse(f["MaNXB"]);
-        //            db.SACHes.InsertOnSubmit(sach);
-        //            db.SubmitChanges();
-        //            //Về lại trang Quản lý sách
-        //            return RedirectToAction("Index");
-        //        }
-        //        return View();
-        //    }
-        //}
-
-        //[HttpGet]
-        //public ActionResult Delete(int id)
-        //{
-        //    var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
-        //    if (sach == null)
-        //    {
-        //        Response.StatusCode = 404;
-        //        return null;
-        //    }
-        //    return View(sach);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirm(int id, FormCollection f)
-        //{
-        //    var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
-        //    if (sach == null)
-        //    {
-        //        Response.StatusCode = 404;
-        //        return null;
-        //    }
-        //    var ctdh = db.CHITIETDATHANGs.Where(ct => ct.MaSach == id);
-        //    if (ctdh.Count() > 0)
-        //    {
-        //        //Nội dung sẽ hiển thị khi sách cần xóa đã có trong table ChiTietDonHang
-        //        //ViewBag.ThongBao = "Sách này đang có trong bảng Chi tiết đặt hàng <br>" + " Nếu muốn xóa thì phải xóa hết mã sách này trong bảng Chi tiết đặt hàng";
-        //        SetAlert("Sách này đang có trong bảng Chi tiết đặt hàng. Nếu muốn xóa thì phải xóa hết mã sách này trong bảng Chi tiết đặt hàng", "danger");
-        //        return View(sach);
-        //    }
-        //    //Xóa hết thông tin của cuốn sách trong table VietSach trước khi xóa sách này
-        //    var vietsach = db.VIETSACHes.Where(vs => vs.MaSach == id).ToList();
-        //    if (vietsach != null)
-        //    {
-        //        db.VIETSACHes.DeleteAllOnSubmit(vietsach);
-        //        db.SubmitChanges();
-        //    }
-        //    //Xóa sách
-        //    db.SACHes.DeleteOnSubmit(sach);
-        //    db.SubmitChanges();
-        //    return RedirectToAction("Index");
-        //}
-
-        //[HttpGet]
-        //public ActionResult Edit(int id)
-        //{
-        //    var sach = db.SACHes.SingleOrDefault(n => n.MaSach == id);
-        //    if (sach == null)
-        //    {
-        //        Response.StatusCode = 404;
-        //        return null;
-        //    }
-        //    //Hiển thị danh sách chủ đề và nhà xuất bản đồng thời chọn chủ đề và nhà xuất bản
-        //    //của cuốn hiện tại
-        //    ViewBag.MaCD = new SelectList(db.CHUDEs.ToList().OrderBy(n => n.TenChuDe),
-        //    "MaCD", "TenChuDe", sach.MaCD);
-        //    ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n =>
-        //    n.TenNXB), "MaNXB", "TenNXB", sach.MaNXB);
-        //    return View(sach);
-        //}
-
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult Edit(FormCollection f, HttpPostedFileBase fFileUpload)
-        //{
-        //    var sach = db.SACHes.SingleOrDefault(n => n.MaSach == int.Parse(f["iMaSach"]));
-        //    ViewBag.MaCD = new SelectList(db.CHUDEs.ToList().OrderBy(n => n.TenChuDe),
-        //    "MaCD", "TenChuDe", sach.MaCD);
-        //    ViewBag.MaNXB = new SelectList(db.NHAXUATBANs.ToList().OrderBy(n =>
-        //    n.TenNXB), "MaNXB", "TenNXB", sach.MaNXB);
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (fFileUpload != null) //Kiểm tra để xác nhận cho thay đổi ảnh bìa
-        //        {
-        //            //Lấy tên file (Khai báo thư viện: System.IO)
-        //            var sFileName = Path.GetFileName(fFileUpload.FileName);
-        //            //Lấy đường dẫn lưu file
-        //            var path = Path.Combine(Server.MapPath("~/Images"), sFileName);
-        //            //Kiểm tra file đã tồn tại chưa
-        //            if (!System.IO.File.Exists(path))
-        //            {
-        //                fFileUpload.SaveAs(path);
-        //            }
-        //        sach.AnhBia = sFileName;
-        //        }
-        //        //Lưu Sach vào CSDL
-        //        sach.TenSach = f["sTenSach"];
-        //        sach.MoTa = f["sMoTa"];
-        //        sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
-        //        sach.SoLuongBan = int.Parse(f["iSoLuong"]);
-        //        sach.GiaBan = decimal.Parse(f["mGiaBan"]);
-        //        sach.MaCD = int.Parse(f["MaCD"]);
-        //        sach.MaNXB = int.Parse(f["MaNXB"]);
-        //        db.SubmitChanges();
-        //        //Về lại trang Quản lý sách
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(sach);
-        //}
-
-        public ActionResult Search(string strSearch)
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult Create(string strTenSach)
         {
-            ViewBag.Search = strSearch;
-            if (string.IsNullOrEmpty(strSearch))
+            try
             {
-                return View();
+                var s = new SACH();
+                s.TenSach = strTenSach;
+                db.SACHes.InsertOnSubmit(s);
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Thêm sách thành công" },
+                    JsonRequestBehavior.AllowGet);
             }
-            var kq = db.SACHes.Where(s => s.TenSach.Contains(strSearch));
-            ViewBag.Kq = kq.Count();
-            return View(kq);
+            catch (Exception e)
+            {
+                return Json(new { code = 500, msg = "Thêm sách thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
+            }
         }
+
+        [HttpPost]
+        public ActionResult Edit(int maSach, string strTenSach)
+        {
+            try
+            {
+                var s = db.SACHes.SingleOrDefault(model => model.MaSach == maSach);
+                s.TenSach = strTenSach;
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Sửa sách thành công" },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { code = 500, msg = "Sửa sách thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult Delete(int maSach)
+        {
+            try
+            {
+                var s = db.SACHes.SingleOrDefault(model => model.MaSach == maSach);
+                db.SACHes.DeleteOnSubmit(s);
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Xoá sách thành công" },
+                    JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { code = 500, msg = "Xoá sách thất bại" + e.Message },
+                    JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //public ActionResult Search(string strSearch)
+        //{
+        //    ViewBag.Search = strSearch;
+        //    if (string.IsNullOrEmpty(strSearch))
+        //    {
+        //        return View();
+        //    }
+        //    var kq = db.SACHes.Where(s => s.TenSach.Contains(strSearch));
+        //    ViewBag.Kq = kq.Count();
+        //    return View(kq);
+        //}
 
         [HttpGet]
         public JsonResult DsSach()
@@ -207,6 +100,7 @@ namespace SachOnline.Areas.Admin.Controllers
                             select new
                             {
                                 MaSach = s.MaSach,
+                                MoTa = s.MoTa,
                                 TenSach = s.TenSach,
                                 Anh = s.AnhBia,
                                 NgayCapNhat = s.NgayCapNhat,

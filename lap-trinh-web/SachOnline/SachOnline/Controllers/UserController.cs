@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 using SachOnline.Models;
 
 namespace SachOnline.Controllers
@@ -51,7 +54,7 @@ namespace SachOnline.Controllers
                 //Gán giá trị cho đối tượng được tạo mới (kh)
                 kh.HoTen = sHoTen;
                 kh.TaiKhoan = sTaiKhoan;
-                kh.MatKhau = sMatKhau;
+                kh.MatKhau = GetMD5(sMatKhau);
                 kh.Email = sEmail;
                 kh.DiaChi = sDiaChi;
                 kh.DienThoai = sDienThoai;
@@ -85,7 +88,7 @@ namespace SachOnline.Controllers
             else
             {
                 KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(
-                    n => n.TaiKhoan == sTenDN && n.MatKhau == sMatKhau
+                    n => n.TaiKhoan == sTenDN && n.MatKhau == GetMD5(sMatKhau)
                 );
                 if (kh != null)
                 {
@@ -120,6 +123,19 @@ namespace SachOnline.Controllers
         {
             Session["TaiKhoan"] = null;
             return RedirectToAction("Index", "Home");
+        }
+
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+            }
+            return byte2String;
         }
     }
 }

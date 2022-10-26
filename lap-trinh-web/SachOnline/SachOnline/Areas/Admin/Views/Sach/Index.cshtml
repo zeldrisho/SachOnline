@@ -6,8 +6,15 @@
 
 @section customStyles {
     <style>
-        .book-img {
-            width: 100px;
+        .item-img {
+            max-width: 100px;
+        }
+
+        .item-desc {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 6;
         }
     </style>
 }
@@ -31,10 +38,9 @@
                         $('#tblDsSach').empty();
                         $.each(data.dsSach, function (k, v) {
                             let s = '<tr id="' + v.MaSach + '">';
-                            let updatedDate = new Date(v.NgayCapNhat.slice(6, 19));
                             s += '<td>' + v.TenSach + '</td>';
-                            s += '<td><img src="/Images/' + v.Anh + '" class="book-img" /></td>';
-                            s += '<td>' + updatedDate + '</td>';
+                            s += '<td><span class="item-desc">' + v.MoTa + '</span></td>';
+                            s += '<td><img src="/Images/' + v.Anh + '" class="img-rounded item-img" /></td>';
                             s += '<td>' + v.SoLuong + '</td>';
                             s += '<td>' + v.GiaBan + '</td>';
                             s += '<td>' + v.TenCD + '</td>';
@@ -64,8 +70,18 @@
                     if (data.code == 200) {
                         $('#txtTenSach').val(data.sach.TenSach);
                         $('#txtTenSach').prop('readonly', true);
+                        $('#txtMoTa').val(data.sach.MoTa);
+                        $('#txtMoTa').prop('readonly', true);
+                        $('#txtSoLuong').val(data.sach.SoLuong);
+                        $('#txtSoLuong').prop('readonly', true);
+                        $('#txtGiaBan').val(data.sach.GiaBan);
+                        $('#txtGiaBan').prop('readonly', true);
+                        $('#txtTenCD').val(data.sach.TenCD);
+                        $('#txtTenCD').prop('readonly', true);
+                        $('#txtTenNXB').val(data.sach.TenNXB);
+                        $('#txtTenNXB').prop('readonly', true);
+
                         $('#btnSubmit').hide();
-                        $('#txtMoTa').hide();
                         $('#modalTitle').text('Xem chi tiết sách');
                         $('#modalSach').modal();
                     } else {
@@ -95,8 +111,18 @@
                 success: function (data) {
                     if (data.code == 200) {
                         $('#txtTenSach').val(data.sach.TenSach);
-                        $('#txtMoTa').val(data.sach.MoTa);
                         $('#txtTenSach').prop('readonly', false);
+                        $('#txtMoTa').val(data.sach.MoTa);
+                        $('#txtMoTa').prop('readonly', false);
+                        $('#txtSoLuong').val(data.sach.SoLuong);
+                        $('#txtSoLuong').prop('readonly', false);
+                        $('#txtGiaBan').val(data.sach.GiaBan);
+                        $('#txtGiaBan').prop('readonly', false);
+                        $('#txtTenCD').val(data.sach.TenCD);
+                        $('#txtTenCD').prop('readonly', false);
+                        $('#txtTenNXB').val(data.sach.TenNXB);
+                        $('#txtTenNXB').prop('readonly', false);
+
                         $('#btnSubmit').show();
                         $('#modalTitle').text('Cập nhật sách');
                         $('#maSach').val(idSach)
@@ -188,8 +214,8 @@
     <thead>
         <tr>
             <th>Tên sách</th>
+            <th>Mô tả</th>
             <th>Ảnh</th>
-            <th>Ngày cập nhật</th>
             <th>Số lượng</th>
             <th>Giá bán</th>
             <th>Tên chủ đề</th>
@@ -212,6 +238,14 @@
                         <input type="text" class="form-control" id="txtTenSach" placeholder="Tên sách" />
                         <label>Mô tả</label>
                         <textarea class="form-control" id="txtMoTa"></textarea>
+                        <label>Số lượng</label>
+                        <input type="number" class="form-control" id="txtSoLuong" />
+                        <label>Giá bán</label>
+                        <input type="number" class="form-control" id="txtGiaBan" />
+                        <label>Tên chủ đề</label>
+                        <input type="text" class="form-control" id="txtTenCD" placeholder="Tên chủ đề" />
+                        <label>Tên nhà xuất bản</label>
+                        <input type="text" class="form-control" id="txtTenNXB" placeholder="Tên nhà xuất bản" />
                     </div>
                 </div>
             </div>
