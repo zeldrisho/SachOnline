@@ -1,0 +1,5 @@
+Dinh 1 --> Mau 1
+Dinh 2 --> Mau 2
+Dinh 3 --> Mau 3
+Dinh 4 --> Mau 1
+Dinh 5 --> Mau 2

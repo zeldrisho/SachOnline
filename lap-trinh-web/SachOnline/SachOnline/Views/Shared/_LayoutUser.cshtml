@@ -28,6 +28,7 @@
             -webkit-line-clamp: 4;
         }
     </style>
+    @RenderSection("customStyles", required: false)
 </head>
 <body>
     @Html.Action("NavPartial", "Home")

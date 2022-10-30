@@ -10,7 +10,7 @@ using System.Web.UI;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
-    public class ChuDeController : BaseController
+    public class ChuDeController : Controller
     {
         DbSachOnlineDataContext db = new DbSachOnlineDataContext();
 

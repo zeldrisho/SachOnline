@@ -138,6 +138,8 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\SachController.cs" />
+    <Compile Include="Areas\Admin\Controllers\String.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrangTinController.cs" />
     <Compile Include="Controllers\FileAndMailController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -683,6 +685,11 @@
     <Content Include="Areas\Admin\Views\Sach\Search.cshtml" />
     <Content Include="Areas\Admin\Views\ChuDe\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Sach\Index.cshtml" />
+    <Content Include="Views\Home\TrangTin.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Delete.cshtml" />
     <None Include="Models\DbSachOnline.dbml.layout">
       <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </None>
@@ -750,7 +757,6 @@
     <Content Include="Views\Nxb\Details.cshtml" />
     <Content Include="Views\Nxb\Edit.cshtml" />
     <Content Include="Views\Nxb\Delete.cshtml" />
-    <Content Include="Views\Shared\MenuPartial.cshtml" />
     <Content Include="Views\FileAndMail\SendMail.cshtml" />
     <Content Include="Views\Shared\LoginLogoutPartial.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
@@ -768,6 +774,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Shared\LoadChildMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

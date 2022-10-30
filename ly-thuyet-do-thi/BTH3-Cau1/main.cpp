@@ -48,10 +48,10 @@ void euler(int v) {
         }
     }
     reverse(begin(EC), end(EC));
-    for (int item : EC) {
-        ofs << item << " ";
-    }
-    cout << "Da xuat ket qua ra file output.txt";
+        for (int item : EC) {
+            ofs << item << " ";
+        }
+    cout << "Da xuat ket qua ra file output.txt" << endl;
     ofs.close();
 }
 

@@ -1,33 +1,28 @@
-#include <iostream>
-#include <fstream>
-#include <set>
-#include <stack>
-#include <vector>
-#include <algorithm>
+#include<bits/stdc++.h>
 using namespace std;
 
-int n, m;
+//dinh, canh, dinh bat ky
+int n, m, k;
 set<int> adj[100];
-int deg[100];
 ifstream ifs("input.txt");
 ofstream ofs("output.txt");
 
-void nhap() {
+void init() {
     ifs >> n >> m;
     int x, y;
     for (int i = 0; i < m; i++) {
         ifs >> x >> y;
         adj[x].insert(y);
         adj[y].insert(x);
-        deg[x]++;
-        deg[y]++;
     }
+    ifs >> k;
 }
 
-void euler(int v) {
+void getEulerCircuit(int v) {
     stack<int> st;
     vector<int> EC;
     st.push(v);
+
     int x, y;
     while (!st.empty()) {
         x = st.top();
@@ -42,20 +37,22 @@ void euler(int v) {
             EC.push_back(x);
         }
     }
-    reverse(begin(EC), end(EC));
-    for (int item : EC) {
-        ofs << item << " ";
+
+    if (EC.front() == EC.back()) {
+        ofs << "Co chu trinh Euler: ";
+        for (int item : EC) {
+            ofs << item << " ";
+        }
+    } else {
+        ofs << "Khong co chu trinh Euler" << endl;
     }
-    ofs << endl;
 }
 
 int main() {
-    nhap();
-//    for (int i = 1; i < n; i++) {
-//        euler(i);
-//    }
-    euler(3);
-    cout << "Da xuat ket qua ra file output.txt";
+    init();
+    getEulerCircuit(k);
+    cout << "Da xuat ket qua ra file output.txt" << endl;
+
     ifs.close();
     ofs.close();
     return 0;

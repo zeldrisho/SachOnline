@@ -83,10 +83,35 @@ namespace SachOnline.Controllers
             return View(sach.Single());
         }
 
+        [ChildActionOnly]
         public ActionResult NavPartial()
         {
-            var menu = data.MENUs;
-            return PartialView(menu);
+            List<MENU> lst = new List<MENU>();
+            lst = data.MENUs.Where(m => m.ParentId == null).OrderBy(m => m.OrderNumber).ToList();
+            int[] a = new int[lst.Count()];
+            for (int i = 0; i < lst.Count(); i++)
+            {
+                var l = data.MENUs.Where(m => m.ParentId == lst[i].Id);
+                a[i] = l.Count();
+            }
+            ViewBag.lst = a;
+            return PartialView(lst);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoadChildMenu(int parentId)
+        {
+            List<MENU> lst = new List<MENU>();
+            lst = data.MENUs.Where(m => m.ParentId == parentId).OrderBy(m => m.OrderNumber).ToList();
+            ViewBag.Count = lst.Count();
+            int[] a = new int[lst.Count()];
+            for (int i = 0; i < lst.Count(); i++)
+            {
+                var l = data.MENUs.Where(m => m.ParentId == lst[i].Id);
+                a[i] = l.Count();
+            }
+            ViewBag.lst = a;
+            return PartialView("LoadChildMenu", lst);
         }
 
         [HttpGet]
@@ -115,21 +140,15 @@ namespace SachOnline.Controllers
             return View();
         }
 
-        public ActionResult MenuPartial()
-        {
-            ViewBag.Menu = MenuList();
-            return PartialView();
-        }
-
-        private IList<MENU> MenuList()
-        {
-            var list = data.MENUs.ToList();
-            return list;
-        }
-
         public ActionResult LoginLogoutPartial()
         {
             return PartialView();
+        }
+
+        public ActionResult TrangTin(string metatitle)
+        {
+            var tt = data.TRANGTINs.Where(t => t.MetaTitle == metatitle).SingleOrDefault();
+            return View(tt);
         }
     }
 }

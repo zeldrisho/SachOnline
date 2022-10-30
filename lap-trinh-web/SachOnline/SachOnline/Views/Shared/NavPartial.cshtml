@@ -15,52 +15,35 @@
         <!-- Collect the nav links, forms, and other content for toggling
         (Chứa nội dung của navbar) -->
         <div class="collapse navbar-collapse" id="navbar1">
-            @Html.Action("MenuPartial", "Home")
+            <ul class="nav navbar-nav">
+                @{
+                    int i = 0;
+                    foreach (var item in Model)
+                    {
+                        if (ViewBag.lst[i] != 0)
+                        {
+                            <li class="dropdown">
+                                <a href="@item.MenuLink" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    @item.MenuName <span class="caret"></span>
+                                </a>
+                                @Html.Action("LoadChildMenu", "Home", new { parentId = item.Id })
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="~/@item.MenuLink">@item.MenuName</a>
+                            </li>
+                        }
+                        i++;
+                    }
+                }
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>@Html.Action("LoginLogoutPartial", "Home")</li>
                 <li>@Html.Action("GioHangPartial", "GioHang")</li>
-                @*<li class="dropdown">
-                        @{
-                            string tk = (string)Session["HoTen"];
-                            if (string.IsNullOrEmpty(tk))
-                            {
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    Người dùng
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("DangKy", "User")"><span class="glyphicon glyphicon-user"></span> Đăng ký</a> </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="@Url.Action("DangNhap", "User")"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
-                                </ul>
-                            }
-                            else
-                            {
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @tk
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("XemThongTin", "User")"><span class="glyphicon glyphicon-user"></span> Xem thông tin</a> </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="@Url.Action("DangXuat", "User")"><span class="glyphicon glyphicon-log-in"></span> Đăng xuất</a></li>
-                                </ul>
-                            }
-                        }
-                    </li>
-                    <li>
-                        @Html.Action("GioHangPartial", "GioHang")
-                    </li>*@
             </ul>
-
-            @*@using (Html.BeginForm("Search", "Search", FormMethod.Get, new { @class = "navbar-form navbar-right", @role = "search" }))
-                {
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm" name="strSearch">
-                    </div>
-                    <button type="submit" class="btn btn-default">Tìm</button>
-                }*@
         </div>
         <!-- /.navbar-collapse -->
     </div>

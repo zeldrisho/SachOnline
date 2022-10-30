@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
-    public class SachController : BaseController
+    public class SachController : Controller
     {
         DbSachOnlineDataContext db = new DbSachOnlineDataContext();
 
@@ -77,18 +77,6 @@ namespace SachOnline.Areas.Admin.Controllers
                     JsonRequestBehavior.AllowGet);
             }
         }
-
-        //public ActionResult Search(string strSearch)
-        //{
-        //    ViewBag.Search = strSearch;
-        //    if (string.IsNullOrEmpty(strSearch))
-        //    {
-        //        return View();
-        //    }
-        //    var kq = db.SACHes.Where(s => s.TenSach.Contains(strSearch));
-        //    ViewBag.Kq = kq.Count();
-        //    return View(kq);
-        //}
 
         [HttpGet]
         public JsonResult DsSach()

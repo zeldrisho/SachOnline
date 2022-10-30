@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         // GET: Admin/Home
         public ActionResult Index()

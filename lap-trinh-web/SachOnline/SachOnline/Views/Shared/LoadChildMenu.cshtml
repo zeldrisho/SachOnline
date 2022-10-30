@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SachOnline.Models.MENU>
+
+@{
+    int i = 0;
+    @:<ul class="dropdown-menu">
+        foreach (var item in Model)
+        {
+            if (ViewBag.lst[i] != 0)
+            {
+                <li class="dropdown-submenu">
+                    <a href="#" class="test list-group-item">
+                        @item.MenuName <i class="fa fa-caret-right"></i>
+                    </a>
+                    @Html.Action("LoadChildMenu", "Home", new { parentId = item.Id })
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/@item.MenuLink" class="list-group-item">@item.MenuName</a>
+                </li>
+            }
+            i++;
+        }
+    @:</ul>
+}

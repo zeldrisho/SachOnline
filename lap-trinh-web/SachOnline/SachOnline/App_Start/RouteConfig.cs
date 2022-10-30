@@ -19,6 +19,21 @@ namespace SachOnline
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "SachOnline.Controllers" }
             );
+
+            routes.MapRoute(
+                name: "Sach theo chu de",
+                url: "sach-theo-chu-de-{id}",
+                defaults: new { controller = "Home", action = "SachTheoCD", id = UrlParameter.Optional },
+                namespaces: new string[] { "SachOnline.Controllers" }
+            );
+
+
+            routes.MapRoute(
+                name: "Trang tin",
+                url: "{metatitle}",
+                defaults: new { controller = "Home", action = "TrangTin", metatitle = UrlParameter.Optional },
+                namespaces: new string[] { "SachOnline.Controllers" }
+            );
         }
     }
 }

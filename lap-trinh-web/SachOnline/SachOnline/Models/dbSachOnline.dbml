@@ -62,15 +62,6 @@
       <Association Name="KHACHHANG_DONDATHANG" Member="DONDATHANGs" ThisKey="MaKH" OtherKey="MaKH" Type="DONDATHANG" />
     </Type>
   </Table>
-  <Table Name="dbo.MENU" Member="MENUs">
-    <Type Name="MENU">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MenuName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="MenuLink" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OrderNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.NHAXUATBAN" Member="NHAXUATBANs">
     <Type Name="NHAXUATBAN">
       <Column Name="MaNXB" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -105,6 +96,24 @@
       <Column Name="TieuSu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="DienThoai" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Association Name="TACGIA_VIETSACH" Member="VIETSACHes" ThisKey="MaTG" OtherKey="MaTG" Type="VIETSACH" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TRANGTIN" Member="TRANGTINs">
+    <Type Name="TRANGTIN">
+      <Column Name="MaTT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenTrang" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NoiDung" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="MetaTitle" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MENU" Member="MENUs">
+    <Type Name="MENU">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MenuName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MenuLink" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Sp_NHAXUATBAN_Insert" Method="Sp_NHAXUATBAN_Insert">

@@ -7,12 +7,36 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<style>
-    .MenuTrang {
-        display: inline;
-        text-align: center;
-    }
-</style>
+@section customStyles {
+    <style>
+        .MenuTrang {
+            display: inline;
+            text-align: center;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -1px;
+            }
+    </style>
+}
+
+@section customScripts {
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on('click', function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            })
+        })
+    </script>
+}
 
 <h2 class="text-center">SÁCH MỚI</h2>
 <hr />
