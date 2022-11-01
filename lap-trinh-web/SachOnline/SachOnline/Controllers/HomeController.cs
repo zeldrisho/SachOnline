@@ -150,5 +150,11 @@ namespace SachOnline.Controllers
             var tt = data.TRANGTINs.Where(t => t.MetaTitle == metatitle).SingleOrDefault();
             return View(tt);
         }
+
+        public ActionResult SliderPartial()
+        {
+            var model = data.SLIDEs.Where(m => m.HienThi == true).ToList();
+            return PartialView(model);
+        }
     }
 }

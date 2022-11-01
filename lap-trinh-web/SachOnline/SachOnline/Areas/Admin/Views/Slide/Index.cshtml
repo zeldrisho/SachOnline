@@ -1,0 +1,80 @@
+﻿@model IEnumerable<SachOnline.Models.SLIDE>
+
+@{
+    ViewBag.Title = "Quản lý slide";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    @Styles.Render("~/Content/datatables")
+    <style>
+        .img-col {
+            max-width: 100px;
+        }
+
+        .mgt {
+            margin-top: 16px;
+        }
+    </style>
+}
+
+@section customScripts {
+    @Scripts.Render("~/bundles/datatables")
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+
+<h2>Quản lý slide</h2>
+
+<div class="mgt">
+    <a href="/Admin/Slide/Create" class="btn btn-primary">Thêm mới</a>
+</div>
+<div class="table-responsive mgt">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Ảnh</th>
+                <th>Mô tả</th>
+                <th>Hiển thị</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Ảnh</th>
+                <th>Mô tả</th>
+                <th>Hiển thị</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row_@item.Id">
+                    <td>@item.TieuDe</td>
+                    <td class="img-col">
+                        <img src="@item.Anh" alt="Ảnh sản phẩm" class="img-responsive img-rounded" />
+                    </td>
+                    <td>@item.MoTa</td>
+                    <td>@item.HienThi</td>
+                    <td>
+                        <a href="~/Admin/Slide/Edit/@item.Id" class="btn btn-warning">
+                            Cập nhật
+                        </a> |
+                        @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                        {
+                            Confirm = "Xác nhận xoá slide",
+                            OnComplete = "$('#row_" + item.Id + "').remove()",
+                            HttpMethod = "Delete"
+                        }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
