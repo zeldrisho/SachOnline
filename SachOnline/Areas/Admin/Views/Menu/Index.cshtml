@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SachOnline.Models.MENU>
+
+@{
+    ViewBag.Title = "Quản lý menu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section customStyles {
+    <style>
+        .menu-item {
+            border: 1px solid #000000;
+            text-align: center;
+        }
+
+        .mg-block {
+            margin-block: 20px;
+            display: block;
+        }
+    </style>
+}
+
+@section customScripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
+<div class="col-md-5">
+    <h3>Danh sách menu</h3>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.Id">
+                <td class="menu-item col-md-8">
+                    <span class="text-center">@item.MenuName</span>
+                </td>
+                <td class="col-md-4">
+                    <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
+                        Sửa
+                    </a> |
+                    @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                    {
+                        Confirm = "Xác nhận xoá menu",
+                        OnComplete = "$('#row_" + item.Id + "').remove()",
+                        HttpMethod = "Delete"
+                    }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<div class="col-md-7">
+    <h3>Thêm menu</h3>
+    <button class="btn btn-primary mg-block">Thêm menu từ Danh mục</button>
+    <button class="btn btn-primary mg-block">Thêm menu từ Trang tin</button>
+    <button class="btn btn-primary mg-block">Thêm menu từ Link tự do</button>
+    <div class="form-group mg-block">
+        <span class="control-label">Tên menu: </span>
+        <input type="text" name="MenuName" value="" class="form-control" />
+    </div>
+    <div class="form-group mg-block">
+        <span class="control-label">Link: </span>
+        <input type="text" name="MenuLink" value="" class="form-control" />
+    </div>
+    <div class="form-group mg-block">
+        <button class="btn btn-primary">Chọn menu cha</button>
+        <input type="number" name="ParentId" value="" />
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block mg-block">Thêm</button>
+</div>
