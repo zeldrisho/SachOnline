@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SachOnline.Models.MENU>
+
+<ul class="list-group">
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            if (ViewBag.lst[i] != 0)
+            {
+                <li class="list-group-item" id="row_@item.Id">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="@item.Id">
+                        <label class="custom-control-label" for="customCheck1">@item.MenuName</label>
+                        <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
+                            Sửa
+                        </a> |
+                        @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                   {
+                       Confirm = "Xác nhận xoá menu",
+                       OnComplete = "$('#row_" + item.Id + "').remove()",
+                       HttpMethod = "Delete"
+                   }, new { @class = "btn btn-danger" })
+                        @Html.Action("LoadChildMenu", "Menu", new { parentId = item.Id })
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="list-group-item" id="row_@item.Id">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="@item.Id">
+                        <label class="custom-control-label" for="customCheck1">@item.MenuName</label>
+                        <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
+                            Sửa
+                        </a> |
+                        @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                        {
+                            Confirm = "Xác nhận xoá menu",
+                            OnComplete = "$('#row_" + item.Id + "').remove()",
+                            HttpMethod = "Delete"
+                        }, new { @class = "btn btn-danger" })
+                    </div>
+                </li>
+            }
+            i++;
+        }
+    }
+</ul>

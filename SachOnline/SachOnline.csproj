@@ -1439,6 +1439,8 @@
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
+    <Content Include="Views\Shared\LoadChildMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\LoadChildMenu.cshtml" />
     <None Include="Models\DbSachOnline.dbml.layout">
       <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </None>
@@ -1512,7 +1514,6 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
-    <Content Include="Views\Shared\LoadChildMenu.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />

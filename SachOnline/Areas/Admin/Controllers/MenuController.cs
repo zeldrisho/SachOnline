@@ -12,11 +12,26 @@ namespace SachOnline.Areas.Admin.Controllers
     {
         DbSachOnlineDataContext db = new DbSachOnlineDataContext();
 
+        public int? ToNullableInt(string s)
+        {
+            int i;
+            if (int.TryParse(s, out i)) return i;
+            return null;
+        }
+
         // GET: Admin/Menu
         public ActionResult Index()
         {
-            var model = db.MENUs.ToList();
-            return View(model);
+            List<MENU> lst = new List<MENU>();
+            lst = db.MENUs.Where(m => m.ParentId == null).OrderBy(m => m.OrderNumber).ToList();
+            int[] a = new int[lst.Count()];
+            for (int i = 0; i < lst.Count; i++)
+            {
+                var l = db.MENUs.Where(m => m.ParentId == lst[i].Id);
+                a[i] = l.Count();
+            }
+            ViewBag.lst = a;
+            return View(lst);
         }
 
         // GET: Admin/Menu/Create
@@ -27,13 +42,14 @@ namespace SachOnline.Areas.Admin.Controllers
 
         // POST: Admin/Menu/Create
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(MENU menu, FormCollection f)
         {
             if (ModelState.IsValid)
             {
                 menu.MenuName = f["MenuName"];
                 menu.MenuLink = f["MenuLink"];
-                menu.ParentId = int.Parse(f["ParentId"]);
+                menu.ParentId = ToNullableInt(f["ParentId"]);
                 menu.OrderNumber = int.Parse(f["OrderNumber"]);
                 db.MENUs.InsertOnSubmit(menu);
                 db.SubmitChanges();
@@ -63,9 +79,8 @@ namespace SachOnline.Areas.Admin.Controllers
             {
                 menu.MenuName = f["MenuName"];
                 menu.MenuLink = f["MenuLink"];
-                menu.ParentId = int.Parse(f["ParentId"]);
+                menu.ParentId = ToNullableInt(f["ParentId"]);
                 menu.OrderNumber = int.Parse(f["OrderNumber"]);
-                db.MENUs.InsertOnSubmit(menu);
                 db.SubmitChanges();
                 return RedirectToAction("Index");
             }
@@ -87,6 +102,22 @@ namespace SachOnline.Areas.Admin.Controllers
             {
                 return false;
             }
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoadChildMenu(int parentId)
+        {
+            List<MENU> lst = new List<MENU>();
+            lst = db.MENUs.Where(m => m.ParentId == parentId).OrderBy(m => m.OrderNumber).ToList();
+            ViewBag.Count = lst.Count();
+            int[] a = new int[lst.Count()];
+            for (int i = 0; i < lst.Count(); i++)
+            {
+                var l = db.MENUs.Where(m => m.ParentId == lst[i].Id);
+                a[i] = l.Count();
+            }
+            ViewBag.lst = a;
+            return PartialView("LoadChildMenu", lst);
         }
     }
 }

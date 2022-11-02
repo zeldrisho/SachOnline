@@ -13,8 +13,7 @@
         }
 
         .mg-block {
-            margin-block: 20px;
-            display: block;
+            margin-block: 16px;
         }
     </style>
 }
@@ -25,33 +24,57 @@
 
 <div class="col-md-5">
     <h3>Danh sách menu</h3>
-    <table class="table">
-        @foreach (var item in Model)
-        {
-            <tr id="row_@item.Id">
-                <td class="menu-item col-md-8">
-                    <span class="text-center">@item.MenuName</span>
-                </td>
-                <td class="col-md-4">
-                    <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
-                        Sửa
-                    </a> |
-                    @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
-                    {
-                        Confirm = "Xác nhận xoá menu",
-                        OnComplete = "$('#row_" + item.Id + "').remove()",
-                        HttpMethod = "Delete"
-                    }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+    <ul class="list-group" style="list-style-type:none">
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                if (ViewBag.lst[i] != 0)
+                {
+                    <li class="list-group-item" id="row_@item.Id">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="@item.Id">
+                                <label class="custom-control-label" for="customCheck1">@item.MenuName</label>
+                                <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
+                                    Sửa
+                                </a> |
+                                @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                           {
+                               Confirm = "Xác nhận xoá menu",
+                               OnComplete = "$('#row_" + item.Id + "').remove()",
+                               HttpMethod = "Delete"
+                           }, new { @class = "btn btn-danger" })
+                                @Html.Action("LoadChildMenu", "Menu", new { parentId = item.Id })
+                            </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="list-group-item" id="row_@item.Id">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="@item.Id">
+                            <label class="custom-control-label" for="customCheck1">@item.MenuName</label>
+                            <a href="~/Admin/Menu/Edit/@item.Id" class="btn btn-warning">
+                                Sửa
+                            </a> |
+                            @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                       {
+                           Confirm = "Xác nhận xoá menu",
+                           OnComplete = "$('#row_" + item.Id + "').remove()",
+                           HttpMethod = "Delete"
+                       }, new { @class = "btn btn-danger" })
+                        </div>
+                    </li>
+                }
+                i++;
+            }
         }
-    </table>
-
+    </ul>
 </div>
 
 <div class="col-md-7">
     <h3>Thêm menu</h3>
-    <button class="btn btn-primary mg-block">Thêm menu từ Danh mục</button>
+    <a href="~/Admin/Menu/Create" class="btn btn-primary mg-block">Thêm menu từ Danh mục</a>
     <button class="btn btn-primary mg-block">Thêm menu từ Trang tin</button>
     <button class="btn btn-primary mg-block">Thêm menu từ Link tự do</button>
     <div class="form-group mg-block">
@@ -62,9 +85,14 @@
         <span class="control-label">Link: </span>
         <input type="text" name="MenuLink" value="" class="form-control" />
     </div>
-    <div class="form-group mg-block">
-        <button class="btn btn-primary">Chọn menu cha</button>
-        <input type="number" name="ParentId" value="" />
+    <div class="form-group">
+        <select class="form-control" id="Select_Menu_Cha">
+            <option>Chọn menu cha</option>
+            @foreach (var item in Model)
+            {
+                <option>@item.MenuName</option>
+            }
+        </select>
     </div>
 
     <button type="submit" class="btn btn-success btn-block mg-block">Thêm</button>
