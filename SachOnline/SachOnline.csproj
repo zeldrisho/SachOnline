@@ -1436,11 +1436,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Views\Shared\LoadChildMenu.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\LoadChildMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\ChildMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\ChildMenu1.cshtml" />
     <None Include="Models\DbSachOnline.dbml.layout">
       <DependentUpon>DbSachOnline.dbml</DependentUpon>
     </None>

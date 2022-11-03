@@ -1,10 +1,15 @@
-﻿using SachOnline.Models;
+﻿using Microsoft.Ajax.Utilities;
+using SachOnline.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 
 namespace SachOnline.Areas.Admin.Controllers
 {
@@ -12,100 +17,85 @@ namespace SachOnline.Areas.Admin.Controllers
     {
         DbSachOnlineDataContext db = new DbSachOnlineDataContext();
 
-        public int? ToNullableInt(string s)
-        {
-            int i;
-            if (int.TryParse(s, out i)) return i;
-            return null;
-        }
-
         // GET: Admin/Menu
         public ActionResult Index()
         {
-            List<MENU> lst = new List<MENU>();
-            lst = db.MENUs.Where(m => m.ParentId == null).OrderBy(m => m.OrderNumber).ToList();
-            int[] a = new int[lst.Count()];
-            for (int i = 0; i < lst.Count; i++)
+            var listMenu = db.MENUs.Where(m => m.ParentId == null).OrderBy(m => m.OrderNumber).ToList();
+            int[] a = new int[listMenu.Count()];
+            for (int i = 0; i < listMenu.Count; i++)
             {
-                var l = db.MENUs.Where(m => m.ParentId == lst[i].Id);
+                var l = db.MENUs.Where(m => m.ParentId == listMenu[i].Id);
                 a[i] = l.Count();
             }
             ViewBag.lst = a;
-            return View(lst);
-        }
-
-        // GET: Admin/Menu/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Menu/Create
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Create(MENU menu, FormCollection f)
-        {
-            if (ModelState.IsValid)
-            {
-                menu.MenuName = f["MenuName"];
-                menu.MenuLink = f["MenuLink"];
-                menu.ParentId = ToNullableInt(f["ParentId"]);
-                menu.OrderNumber = int.Parse(f["OrderNumber"]);
-                db.MENUs.InsertOnSubmit(menu);
-                db.SubmitChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
+            List<CHUDE> cd = db.CHUDEs.ToList();
+            ViewBag.ChuDe = cd;
+            List<TRANGTIN> tt = db.TRANGTINs.ToList();
+            ViewBag.TrangTin = tt;
+            return View(listMenu);
         }
 
         // GET: Admin/Menu/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public JsonResult Update(int id)
         {
-            var model = db.MENUs.SingleOrDefault(n => n.Id == id);
-            if (model == null)
+            try
             {
-                Response.StatusCode = 404;
-                return null;
+                var mn = (from m in db.MENUs
+                          where (m.Id == id)
+                          select new
+                          {
+                              Id = m.Id,
+                              MenuName = m.MenuName,
+                              MenuLink = m.MenuLink,
+                              OrderNumber = m.OrderNumber
+                          }).SingleOrDefault();
+                return Json(new { code = 200, mn = mn, msg = "Lấy thông tin thành công." }, JsonRequestBehavior.AllowGet);
             }
-            return View(model);
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = "Lấy thông tin thất bại." + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         // POST: Admin/Menu/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection f)
-        {
-            var menu = db.MENUs.SingleOrDefault(n => n.Id == int.Parse(f["Id"]));
-            if (ModelState.IsValid)
-            {
-                menu.MenuName = f["MenuName"];
-                menu.MenuLink = f["MenuLink"];
-                menu.ParentId = ToNullableInt(f["ParentId"]);
-                menu.OrderNumber = int.Parse(f["OrderNumber"]);
-                db.SubmitChanges();
-                return RedirectToAction("Index");
-            }
-            return View(menu);
-        }
-
-        // POST: Admin/Menu/Delete/5
-        [HttpDelete]
-        public bool Delete(int id)
+        public JsonResult Update(int id, string strTenMenu, string strLink, int STT)
         {
             try
             {
-                var model = db.MENUs.SingleOrDefault(n => n.Id == id);
-                db.MENUs.DeleteOnSubmit(model);
+                var mn = db.MENUs.SingleOrDefault(m => m.Id == id);
+                mn.MenuName = strTenMenu;
+                mn.MenuLink = strLink;
+                mn.OrderNumber = STT;
                 db.SubmitChanges();
-                return true;
+                return Json(new { code = 200, msg = "Sửa menu thành công." }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                return Json(new { code = 500, msg = "Sửa menu thất bại. Lỗi: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            List<MENU> submn = db.MENUs.Where(m => m.ParentId == id).ToList();
+            if (submn.Count() > 0)
+            {
+                return Json(new { code = 500, msg = "Còn menu con, không xóa được." }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var mn = db.MENUs.SingleOrDefault(m => m.Id == id);
+                db.MENUs.DeleteOnSubmit(mn);
+                db.SubmitChanges();
+                return Json(new { code = 200, msg = "Xoá thành công." }, JsonRequestBehavior.AllowGet);
             }
         }
 
         [ChildActionOnly]
-        public ActionResult LoadChildMenu(int parentId)
+        public ActionResult ChildMenu(int parentId)
         {
             List<MENU> lst = new List<MENU>();
             lst = db.MENUs.Where(m => m.ParentId == parentId).OrderBy(m => m.OrderNumber).ToList();
@@ -117,7 +107,82 @@ namespace SachOnline.Areas.Admin.Controllers
                 a[i] = l.Count();
             }
             ViewBag.lst = a;
-            return PartialView("LoadChildMenu", lst);
+            return PartialView("ChildMenu", lst);
+        }
+
+        [ChildActionOnly]
+        public ActionResult ChildMenu1(int parentId)
+        {
+            List<MENU> lst = new List<MENU>();
+            lst = db.MENUs.Where(m => m.ParentId == parentId).OrderBy(m => m.OrderNumber).ToList();
+            ViewBag.Count = lst.Count();
+            int[] a = new int[lst.Count()];
+            for (int i = 0; i < lst.Count(); i++)
+            {
+                var l = db.MENUs.Where(m => m.ParentId == lst[i].Id);
+                a[i] = l.Count();
+            }
+            ViewBag.lst = a;
+            return PartialView("ChildMenu1", lst);
+        }
+
+        [HttpPost]
+        public ActionResult AddMenu(FormCollection f)
+        {
+            if (!String.IsNullOrEmpty(f["ThemChude"]))
+            {
+                MENU m = new MENU();
+                var cd = db.CHUDEs.Where(c => c.MaCD == int.Parse(f["MaCD"].ToString())).SingleOrDefault();
+                m.MenuName = cd.TenChuDe;
+                m.MenuLink = "sach-theo-chu-de-" + cd.MaCD;
+                if (!String.IsNullOrEmpty(f["ParentID"]))
+                {
+                    m.ParentId = int.Parse(f["ParentID"]);
+                }
+                else
+                {
+                    m.ParentId = null;
+                }
+                m.OrderNumber = int.Parse(f["Number"]);
+                db.MENUs.InsertOnSubmit(m);
+                db.SubmitChanges();
+            }
+            else if (!String.IsNullOrEmpty(f["ThemTrang"]))
+            {
+                MENU m = new MENU();
+                var trang = db.TRANGTINs.Where(t => t.MaTT == int.Parse(f["MaTT"].ToString())).SingleOrDefault();
+                m.MenuName = trang.TenTrang;
+                m.MenuLink = trang.MetaTitle;
+                if (!String.IsNullOrEmpty(f["ParentID"]))
+                {
+                    m.ParentId = int.Parse(f["ParentID"]);
+                }
+                else
+                {
+                    m.ParentId = null;
+                }
+                m.OrderNumber = int.Parse(f["Number1"]);
+                db.MENUs.InsertOnSubmit(m);
+                db.SubmitChanges();
+            }
+            else if (!String.IsNullOrEmpty(f["ThemLink"]))
+            {
+                MENU m = new MENU();
+                m.MenuName = f["TenMenu"];
+                m.MenuLink = f["Link"];
+                if (!String.IsNullOrEmpty(f["Parent 10"]))
+                {
+                    m.ParentId = int.Parse(f["ParentID"]);
+                }
+                else
+                {
+                    m.ParentId = null;
+                }
+                m.OrderNumber = int.Parse(f["Number2"]);
+                db.MENUs.InsertOnSubmit(m);
+                db.SubmitChanges();
+            }
+            return Redirect("~/Admin/Menu/Index");
         }
     }
 }
